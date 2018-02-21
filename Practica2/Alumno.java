@@ -37,16 +37,21 @@ public class Alumno{
 	}
 
 	/*Constructor para el tester dado en clase*/
-	public Alumno(String dni, String nombre, String apellidos, String carnetMatriculado, Fecha fechaMatriculacion){
+	public Alumno(String dni, String nombre, String apellidos, int anyo, int mes, int dia, String carnetMatriculado){
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.carnetMatriculado = carnetMatriculado;
-		this.fechaMatriculacion = fechaMatriculacion;
+		this.fechaMatriculacion =new Fecha(anyo, mes, dia);
 
 	}
 
-	public toString(){
+	public Fecha getFechaMatr(){
+		return this.fechaMatriculacion;
+
+	}
+
+	public String toString(){
 		return "Nombre: " + this.nombre + "\nApellido: " + apellidos + "\nDNI: " + dni + "\nFecha Matricula: " + fechaMatriculacion + "\nTipo Carnet: " + carnetMatriculado;
 	}
 }

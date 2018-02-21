@@ -18,9 +18,9 @@ public class Fecha{
 
 	}
 
-	public boolean isFechavalida(){
+	public boolean isFechaValida(){
 		/*Comprobamos que el mes es válido*/
-		if(mes > 13 || mes < 1) return false;
+		if(mes > 12 || mes < 1) return false;
 		if(dia < 1) return false;
 
 		/*Meses con 31 días*/
