@@ -15,7 +15,7 @@ public class TesterAutoescuela {
 		System.out.println("isValida <" + c1 + "> ? " + c1.isFechaValida());
 		System.out.println("isValida <" + c2 + "> ? " + c2.isFechaValida());
 		System.out.println("isValida <" + c3 + "> ? " + c3.isFechaValida());
-		System.out.println("Datos de alumno 1 " + a1);
+		System.out.println("Datos de alumno 1:" + a1);
 		System.out.println();
 	}
 }

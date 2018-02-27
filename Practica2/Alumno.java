@@ -20,6 +20,7 @@ public class Alumno{
 	private Fecha fechaApruebaTeorico;
 
 	/*Constructor completo*/
+	/*TODO Completar con @params etc*/
 	public Alumno(String dni, String nombre, String apellidos, String telefono, String carnetTiene, String carnetMatriculado, double descuento,
 	 Fecha fechaNacimiento, Fecha fechaMatriculacion, Fecha fechaApruebaTeorico, Fecha fechaApruebaPractico){
 		this.dni = dni;
@@ -52,7 +53,7 @@ public class Alumno{
 	}
 
 	public String toString(){
-		return "Nombre: " + this.nombre + "\nApellido: " + apellidos + "\nDNI: " + dni + "\nFecha Matricula: " + fechaMatriculacion + "\nTipo Carnet: " + carnetMatriculado;
+		return "\n\tNombre: " + this.nombre + "\n\tApellido: " + apellidos + "\n\tDNI: " + dni + "\n\tFecha Matricula: " + fechaMatriculacion + "\n\tTipo Carnet: " + carnetMatriculado;
 	}
 }
 
