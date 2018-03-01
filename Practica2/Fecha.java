@@ -1,5 +1,5 @@
 /**
- * Esta aplicacion calcula el triangulo de tartaglia de n filas.
+ * Esta clase implementa una fecha.
  *
  * @author Estudiante EPS Javier.delgadod@estudiante.uam.es
  * @author Estudiante EPS Javier.lopezcano@estudiante.uam.es
@@ -11,6 +11,12 @@ public class Fecha{
 	private int mes;
 	private int dia;
 
+	/** 
+	 * Constructor completo
+   	 * @param anyo Año de la fecha
+   	 * @param mes Mes de la fecha
+   	 * @param dia Dia de la fecha
+   	 */
 	public Fecha(int anyo, int mes, int dia){
 		this.anyo = anyo;
 		this.mes = mes;
@@ -18,6 +24,10 @@ public class Fecha{
 
 	}
 
+	/** 
+	 * Función que comprueba si la fecha existe o no (incluyendo años bisiestos)
+   	 * @return Un boolean que si es 1 indica que la fecha es valida y si es 0 indica que la fecha es errónea
+   	 */
 	public boolean isFechaValida(){
 		/*Comprobamos que el mes es válido*/
 		if(mes > 12 || mes < 1) return false;
@@ -43,6 +53,10 @@ public class Fecha{
 		return true;
 	}
 
+	/** 
+	 * Crea un string con la fecha
+   	 * @return String con la fecha
+   	 */
 	public String toString(){
 		return anyo+"-"+mes+"-"+dia;
 	}
