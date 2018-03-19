@@ -37,7 +37,7 @@ public class Sesion{
 	}
 
 	/**
-	* TODO QUITAR PORQUE EN EL CINE NO PODEMOS ACCEDER SI NO
+	* TODO QUITAR PORQUE EN EL CINE NO PODEMOS ACCEDER SIN TENER LA SALA
 	* Constructor de la clase Sesion sin pelicula, de forma que pueda anadir la sesion luego.
 	* @param fecha Fecha de la sesion.
 	* @param pelicula Pelicula que se va a reproducir en la sesion
@@ -72,7 +72,7 @@ public class Sesion{
 	* @param numero Numero de butacas nuevas que queremos reservar.
 	* @return Boolean que indica si hay o no algun error.
 	*/
-	public Boolean actualizarButacasVendidas(int numero){
+	public boolean actualizarButacasVendidas(int numero){
 		if(sala == null) {
 			return false;
 		}else if((this.butacasReservadas + numero) > sala.getButacas()){
@@ -104,7 +104,16 @@ public class Sesion{
    	 * @return Un string con todos los datos de la sesion.
    	 */
 	public String toString(){
-		return "Sesion de la pel�cula " + pelicula.getTitulo() + 
+		return "Sesión de la película " + pelicula.getTitulo() + 
 		" a las " + fecha + " en la sala " + sala + ".";
+	}
+	
+	/**
+	 * Compara dos Sesion para ver si son o no la misma.
+	 * @return boolean con true si son la misma y false en caso contrario.
+	 * */
+	public boolean equals(Sesion s) {
+		return this.sala.equals(s.sala) && this.pelicula.equals(s.pelicula) &&
+				this.fecha.equals(s.fecha) && this.butacasReservadas == s.butacasReservadas;
 	}
 }

@@ -59,6 +59,10 @@ public class Pelicula{
 		return this.titulo;
 	}
 	
+	/**
+	 * Compara dos Pelicula para ver si son o no la misma.
+	 * @return boolean con true si son la misma y false en caso contrario.
+	 * */
 	public boolean equals(Pelicula p) {
 		return this.titulo.equals(p.titulo) && this.director.equals(p.director) && this.anno == p.anno &&
 				this.sinopsis.equals(p.sinopsis) && this.genero == p.genero;

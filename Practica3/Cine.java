@@ -12,7 +12,7 @@ import java.time.LocalDate;
 
 /**
  * TODO Cambiar funciones info que imprimen por un String, con return
- * Getters para devolver todas las películas y/o poder buscar por titulo
+ * Getters para devolver todas las películas y/o poder buscar por titulo.
  * de la pelicula, por ejemplo.
  */
 
@@ -56,6 +56,7 @@ public class Cine{
 		if(pelicula.validar() == false) {
 			return false;
 		}
+		
 		for(Pelicula p  : this.peliculas){
 			if(p.equals(pelicula)) {
 				return false;
@@ -65,10 +66,20 @@ public class Cine{
 		return true;
 	}
 	
-	/*Crea una sala y la añade a la lista de salas*/
-	public void crearSala(int id, int butacas) {
+	/*Crea una sala y la añade a la lista de salas. Comprobamos si esta o no añadida*/
+	public boolean crearSala(int id, int butacas) {
 		Sala sala = new Sala(id, butacas);
+		if(sala.validar() == false) {
+			return false;
+		}
+		
+		for(Sala s: this.salas) {
+			if(s.equals(sala)) {
+				return false;
+			}
+		}
 		this.salas.add(sala);
+		return true;
 	}
 	
 	/*Crea una sesión con una película del array de películas en la fecha dad y la añade a la sala dada*/
@@ -117,7 +128,7 @@ public class Cine{
 
 
 	/* Quita una película del array de películas del cine*/
-	public boolean removePeliculaCartelera(Pelicula pelicula){
+	public boolean quitarPeliculaCartelera(Pelicula pelicula){
 		for(Pelicula p : this.peliculas){
 			if(pelicula.equals(p)){
 				this.peliculas.remove(p);
@@ -135,7 +146,7 @@ public class Cine{
 	}
 
 	public String toString() {
-		return "Cine " + nombre + " en la dirección " + direccion;
+		return "Cine " + nombre + " en la dirección " + direccion + "\n";
 	}
 	
 	/*Imprime la lista de películas del cine*/

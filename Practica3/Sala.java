@@ -25,6 +25,15 @@ public class Sala{
 		this.sesiones = new ArrayList<Sesion>();
 	}
 
+	/**
+	* Valida si los datos de la sala son o no correctos. 
+	* Comprobamos que la sala tenga un numero de butacas positivo.
+	* @retun boolean indicando si es o no valido.
+	*/
+	public boolean validar(){
+		return butacas >= 0;
+	}
+
 	/** 
 	 * Getter del numero de identificacion de la sala.
    	 * @return Numero de identificacion de la sala.
@@ -54,7 +63,7 @@ public class Sala{
    	 * @param sesion Sesion que se quiere añadir a la lita de sesiones de la sala.
    	 * @return Boolean que indica si se ha podido o no añadir la sesión a la lista comprobando las fechas.
    	 */
-	public Boolean anadirSesion(Sesion sesion){
+	public boolean anadirSesion(Sesion sesion){
 		for(Sesion ses : this.sesiones){
 			if(ses.getFecha().equals(sesion.getFecha())) return false;
 		}
@@ -68,6 +77,14 @@ public class Sala{
    	 */
 	public String toString(){
 		return String.valueOf(id);
+	}
+	
+	/**
+	 * Compara dos Sala para ver si son o no la misma.
+	 * @return boolean con true si son la misma y false en caso contrario.
+	 * */
+	public boolean equals(Sala s) {
+		return this.id == s.id && this.butacas == s.butacas;
 	}
 }
 
