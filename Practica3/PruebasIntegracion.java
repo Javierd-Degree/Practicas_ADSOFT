@@ -46,5 +46,10 @@ public class PruebasIntegracion {
 		System.out.println("Intentamos añadir una sala no válida: " + cine.crearSala(7, -124));
 	
 		/*TODO Añadirpelicula, vender entrada ... quitarPeliculaCartelera*/
+		
+		/*TODO Añadir mas peliculas, sesiones y salas para la prueba*/
+		System.out.println(cine.infoCartelera());
+		System.out.println(cine.infoSesiones());
+		/*TODO infoSesionesPelicula*/
 	}
 }

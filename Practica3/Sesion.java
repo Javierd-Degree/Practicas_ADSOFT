@@ -105,7 +105,7 @@ public class Sesion{
    	 */
 	public String toString(){
 		return "Sesión de la película " + pelicula.getTitulo() + 
-		" a las " + fecha + " en la sala " + sala + ".";
+		" a las " + fecha + " en la sala " + sala.getId() + ".";
 	}
 	
 	/**

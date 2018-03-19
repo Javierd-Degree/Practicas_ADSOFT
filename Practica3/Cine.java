@@ -82,7 +82,8 @@ public class Cine{
 		return true;
 	}
 	
-	/*Crea una sesión con una película del array de películas en la fecha dad y la añade a la sala dada*/
+	/* TODO ¿No es mejor llamarlo crearSesion?
+	 * Crea una sesión con una película del array de películas en la fecha dad y la añade a la sala dada*/
 	public boolean anadirPeliculaSala(Sala sala, Pelicula pelicula, LocalDate fechaSesion) {
 		Sesion sesion = new Sesion(fechaSesion, pelicula, sala, 0);
 		if(sesion.validar() == false){
@@ -119,7 +120,7 @@ public class Cine{
 
 	/*El campo entrada de Cine indica las entradas vendidas*/
 	public double recaudacion(){
-		double rec=0;
+		double rec = 0;
 		for(Entrada entrada : this.entradas){
 			rec += entrada.getPrecio();
 		}
@@ -150,29 +151,36 @@ public class Cine{
 	}
 	
 	/*Imprime la lista de películas del cine*/
-	public void infoCartelera(){
+	public String infoCartelera(){
+		String text = "Cartelera del cine " + nombre + ", " + direccion + "\n";
 		for(Pelicula pelicula : this.peliculas){
-			System.out.println(pelicula + "\n");
+			text += pelicula + "\n";
 		}
+		return text;
 	}
 
 	/*Imprime la información de todas las sesiones del cine*/
-	public void infoSesiones(){
+	public String infoSesiones(){
+		String text = "Sesiones del cine " + nombre + ", " + direccion + "\n";
 		for(Sala sala : this.salas){
 			for(Sesion sesion : sala.getSesiones())
-				System.out.println(sesion + "\n");
+				text += sesion;
 		}
+		return text;
 	}
 
 	/*Imprime la información de todas las sesiones para una determinada película*/
-	public void infoPeliculaFecha(Pelicula pelicula){
+	public String infoSesionesPelicula(Pelicula pelicula){
+		String text = "Sesiones en el cine " + nombre + ", " + direccion + 
+				"de la película " + pelicula.getTitulo() + "\n";
 		for(Sala sala : this.salas){
 			for(Sesion sesion : sala.getSesiones()){
 				if(pelicula.equals(sesion.getPelicula())){
-					System.out.println(sesion + "\n");
+					text += sesion;
 				}
 			}
 		}
+		return text;
 	}
 }
 
