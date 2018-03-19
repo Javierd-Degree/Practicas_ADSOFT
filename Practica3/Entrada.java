@@ -4,11 +4,13 @@
 * @author Estuiante EPS Javier.lopezcano@estudiante.uam.es
 */
 
-/*TODO ¿Añadir la pelicula de la que es la entrada?*/
+/*TODO A�adir la pelicula de la que es la entrada?*/
 
 public class Entrada{
 	double precio;
 
+	/*TODO Validar comprobar que el precio sea mayor que cero*/
+	
 	/**
 	* Constructor de la clase Entrada.
 	* @param precio Precio de la entrada a crear. 

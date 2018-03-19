@@ -29,6 +29,27 @@ public class Pelicula{
 		this.genero = genero;
 	}
 
+	/**
+	* Valida si los datos de la pelicula son o no correctos. 
+	* Comprobamos que el a√±o sea un numero positivo al menos y que los Strings no sean vacios.
+	* @retun boolean indicando si es o no valido.
+	*/
+	public boolean validar(){
+		if(this.anno < 0){
+			return false;
+		}else if(this.titulo == "" || this.director == "" || this.sinopsis == ""){
+			return false;
+		}
+		return true;
+	}
+
+	/** 
+	 * Crea un string con los datos de la pelicula.
+   	 * @return Un string con todos los datos de la pelicula.
+   	 */
+	public String toString(){
+		return "\tTÌtulo: " + this.titulo + "\n\tDirector: " + this.director + "\n\tAÒo de salida: " + this.anno + "\n\tSinopsis: " + this.sinopsis + "\n\tGÈnero: " + this.genero;
+	}
 
 	/** 
 	 * Getter del titulo de la pelicula.
@@ -36,92 +57,6 @@ public class Pelicula{
    	 */
 	public String getTitulo(){
 		return this.titulo;
-	}
-
-	/** 
-	 * Getter del director de la pelicula.
-   	 * @return Director de la pelicula.
-   	 */
-	public String getDirector(){
-		return this.director;
-	}
-
-	/** 
-	 * Getter del anno de salida de la pelicula.
-   	 * @return Anno de salida de la pelicula.
-   	 */
-	public int getAnno(){
-		return this.anno;
-	}
-
-	/** 
-	 * Getter del resumen de la pelicula.
-   	 * @return Resumen de la pelicula.
-   	 */
-	public String getSinopsis(){
-		return this.sinopsis;
-	}
-
-	/** 
-	 * Getter del genero de la pelicula.
-   	 * @return Genero de la pelicula.
-   	 */
-	public Genero getGenero(){
-		return this.genero;
-	}
-
-
-
-
-
-	/** 
-	 * Setter del titulo de la pelicula.
-   	 * @param titulo Titulo de la pelicula.
-   	 */
-	public void setTitulo(String titulo){
-		this.titulo = titulo;
-	}
-
-	/** 
-	 * Setter del director de la pelicula.
-   	 * @param director Director de la pelicula.
-   	 */
-	public void setDirector(String director){
-		this.director = director;
-	}
-
-	/** 
-	 * Setter del anno de salida de la pelicula.
-   	 * @param anno Anno de salida de la pelicula.
-   	 */
-	public void setAnno(int anno){
-		this.anno = anno;
-	}
-
-	/** 
-	 * Setter del resumen de la pelicula.
-   	 * @param sinopsis Resumen de la pelicula.
-   	 */
-	public void setSinopsis(String sinopsis){
-		this.sinopsis = sinopsis;
-	}
-
-	/** 
-	 * Setter del genero de la pelicula.
-   	 * @param genero Genero de la pelicula.
-   	 */
-	public void setGenero(Genero genero){
-		this.genero = genero;
-	}
-
-
-
-	/** 
-	 * Crea un string con los datos de la pelicula.
-   	 * @return Un string con todos los datos de la pelicula.
-   	 */
-	public String toString(){
-		return "\n\tT√≠tulo: " + this.titulo + "\n\tDirector: " + this.director + "\n\tA√±o de salida: " + this.anno + "\n\tSinopsis: " + this.sinopsis + "\n\tG√©nero: " + this.genero;
 	}
 }
 

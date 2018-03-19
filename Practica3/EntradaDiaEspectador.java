@@ -13,7 +13,7 @@ public class EntradaDiaEspectador extends Entrada{
 	* @param precio Descuento de la entrada a crear, dado como un numero entre 0 y 1.
 	*/
 	public EntradaDiaEspectador(double precio, double descuento){
-		this.precio = precio;
+		super(precio);
 		this.descuento = descuento;
 	}
 

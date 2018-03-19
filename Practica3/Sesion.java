@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
 * Clase que implementa la sesion de una pelicula
 * @author Estuiante EPS Javier.delgadod@estudiante.uam.es
@@ -15,7 +17,7 @@ public class Sesion{
 	Usamos entonces un int que sea butacasReservadas.
 	*/
 
-	Date fecha;
+	LocalDate fecha;
 	Pelicula pelicula;
 	Sala sala;
 	int butacasReservadas;
@@ -27,11 +29,42 @@ public class Sesion{
 	* @param sala Sala en la que tiene lugar la sesion
 	* @param butacas Numero de butacas butacasReservadas
 	*/
-	public Sesion(Date fecha, Pelicula pelicula, Sala sala, int butacasReservadas){
+	public Sesion(LocalDate fecha, Pelicula pelicula, Sala sala, int butacasReservadas){
 		this.fecha = fecha;
 		this.pelicula = pelicula;
 		this.sala = sala;
 		this.butacasReservadas = butacasReservadas;
+	}
+
+	/**
+	* TODO QUITAR PORQUE EN EL CINE NO PODEMOS ACCEDER SI NO
+	* Constructor de la clase Sesion sin pelicula, de forma que pueda anadir la sesion luego.
+	* @param fecha Fecha de la sesion.
+	* @param pelicula Pelicula que se va a reproducir en la sesion
+	* @param butacas Numero de butacas butacasReservadas
+	*/
+	public Sesion(LocalDate fecha, Pelicula pelicula, int butacasReservadas){
+		this.fecha = fecha;
+		this.pelicula = pelicula;
+		this.butacasReservadas = butacasReservadas;
+	}
+	
+	/**
+	* Valida si los datos de la sesion son o no correctos. 
+	* Comprobamos que la pelicula no sean null, y que el numero de butacas
+	* reservadas no sea negativo.
+	* No comprobamos si sala es null porque puede haber una sesion que establezca
+	* la sala posteriormente.
+	* No validamos la pelicula o la sala, solo comprobamos que existan.
+	* @retun boolean indicando si es o no valido.
+	*/
+	public boolean validar(){
+		if(this.butacasReservadas < 0){
+			return false;
+		}else if(pelicula == null || sala == null){
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -40,7 +73,9 @@ public class Sesion{
 	* @return Boolean que indica si hay o no algun error.
 	*/
 	public Boolean actualizarButacasVendidas(int numero){
-		if((this.butacasReservadas + numero) > sala.getButacas()){
+		if(sala == null) {
+			return false;
+		}else if((this.butacasReservadas + numero) > sala.getButacas()){
 			return false;
 		}else{
 			this.butacasReservadas += numero;
@@ -49,11 +84,27 @@ public class Sesion{
 	}
 
 	/**
-	* Getter de la fecha de la sescion.
+	* Getter de la fecha de la sesion.
 	* @return Devuelve la fecha de la sesion.
 	*/
-	public Date getFecha(){
+	public LocalDate getFecha(){
 		return this.fecha;
 	}
 	
+	/**
+	* Getter de la pelicula de la sescion.
+	* @return Devuelve la fecha de la sesion.
+	*/
+	public Pelicula getPelicula(){
+		return this.pelicula;
+	}
+
+	/** 
+	 * Crea un string con los datos de la sesion.
+   	 * @return Un string con todos los datos de la sesion.
+   	 */
+	public String toString(){
+		return "Sesion de la película " + pelicula.getTitulo() + 
+		" a las " + fecha + " en la sala " + sala + ".";
+	}
 }

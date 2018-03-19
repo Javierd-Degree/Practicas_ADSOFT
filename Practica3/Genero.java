@@ -8,13 +8,13 @@ public enum Genero{
 	CIENCIA_FICCION("Ciencia ficcion"), TERROR("Terror"), 
 	ROMANCE("Romance"), DRAMA("Drama"), COMEDIA("Comedia"), 
 	WESTERN("Westerm"), SUSPENSE("Suspense"),
-	EPOCA("Epoca"), ACCION("Accion");
+	EPOCA("Epoca"), ACCION("Accion"), DIBUJOS("Dibujos animados");
 
 	Genero(String n){nombre = n;}
 
 	private final String nombre;
 
-	private String toString() {
+	public String toString() {
 		return nombre;
 	}
 }
