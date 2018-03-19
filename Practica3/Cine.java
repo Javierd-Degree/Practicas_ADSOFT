@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
 import java.time.LocalDate;
 
 /**
@@ -8,6 +9,12 @@ import java.time.LocalDate;
  * @author Estudiante EPS Javier.lopezcano@estudiante.uam.es
  *
 */
+
+/**
+ * TODO Cambiar funciones info que imprimen por un String, con return
+ * Getters para devolver todas las pel√≠culas y/o poder buscar por titulo
+ * de la pelicula, por ejemplo.
+ */
 
 public class Cine{
 	private String nombre;
@@ -28,9 +35,22 @@ public class Cine{
 		this.salas = new ArrayList<Sala>();
 		this.entradas = new ArrayList<Entrada>();
 	}
-	/*TODO comprobar en las funciones necesarias que las salas, pelis... est·n en los arrays del cine*/
+	
+	/**
+	* Valida si los datos del cine son o no correctos. 
+	* Comprobamos que los String de nombre y direcci√≥n no est√©n vac√≠os.
+	* @retun boolean indicando si es o no valido.
+	*/
+	public boolean validar(){
+		if(this.nombre == "" || this.direccion == ""){
+			return false;
+		}
+		return true;
+	}
+	
+	/*TODO comprobar en las funciones necesarias que las salas, pelis... estÔøΩn en los arrays del cine*/
 	/*TODO poner los params y returns para javadoc*/
-	/*Creamos una pelicula y la aÒadimos a la lista de pelÌculas del cine*/
+	/*Creamos una pelicula y la a√±adimos a la lista de pel√≠culas del cine*/
 	public boolean crearPelicula(String titulo, String director, int anno, String sinopsis, Genero genero) {
 		Pelicula pelicula = new Pelicula(titulo, director, anno, sinopsis, genero);
 		if(pelicula.validar() == false) {
@@ -45,13 +65,13 @@ public class Cine{
 		return true;
 	}
 	
-	/*Crea una sala y la aÒade a la lista de salas*/
+	/*Crea una sala y la a√±ade a la lista de salas*/
 	public void crearSala(int id, int butacas) {
 		Sala sala = new Sala(id, butacas);
 		this.salas.add(sala);
 	}
 	
-	/*Crea una sesiÛn con una pelÌcula del array de pelÌculas en la fecha dad y la aÒade a la sala dada*/
+	/*Crea una sesi√≥n con una pel√≠cula del array de pel√≠culas en la fecha dad y la a√±ade a la sala dada*/
 	public boolean anadirPeliculaSala(Sala sala, Pelicula pelicula, LocalDate fechaSesion) {
 		Sesion sesion = new Sesion(fechaSesion, pelicula, sala, 0);
 		if(sesion.validar() == false){
@@ -96,7 +116,7 @@ public class Cine{
 	}
 
 
-	/* Quita una pelÌcula del array de pelÌculas del cine*/
+	/* Quita una pel√≠cula del array de pel√≠culas del cine*/
 	public boolean removePeliculaCartelera(Pelicula pelicula){
 		for(Pelicula p : this.peliculas){
 			if(pelicula.equals(p)){
@@ -114,14 +134,18 @@ public class Cine{
 		return true;
 	}
 
-	/*Imprime la lista de pel˙cilas del cine*/
+	public String toString() {
+		return "Cine " + nombre + " en la direcci√≥n " + direccion;
+	}
+	
+	/*Imprime la lista de pel√≠culas del cine*/
 	public void infoCartelera(){
 		for(Pelicula pelicula : this.peliculas){
 			System.out.println(pelicula + "\n");
 		}
 	}
 
-	/*Imprime la informaciÛn de todas las sesiones del cine*/
+	/*Imprime la informaci√≥n de todas las sesiones del cine*/
 	public void infoSesiones(){
 		for(Sala sala : this.salas){
 			for(Sesion sesion : sala.getSesiones())
@@ -129,7 +153,7 @@ public class Cine{
 		}
 	}
 
-	/*Imprime la informaciÛn de todas las sesiones para una determinada pelÌcula*/
+	/*Imprime la informaci√≥n de todas las sesiones para una determinada pel√≠cula*/
 	public void infoPeliculaFecha(Pelicula pelicula){
 		for(Sala sala : this.salas){
 			for(Sesion sesion : sala.getSesiones()){
