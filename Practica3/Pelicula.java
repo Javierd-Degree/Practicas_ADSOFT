@@ -48,7 +48,7 @@ public class Pelicula{
    	 * @return Un string con todos los datos de la pelicula.
    	 */
 	public String toString(){
-		return "\tTítulo: " + this.titulo + "\n\tDirector: " + this.director + "\n\tAño de salida: " + this.anno + "\n\tSinopsis: " + this.sinopsis + "\n\tGénero: " + this.genero;
+		return "\tTÃ­tulo: " + this.titulo + "\n\tDirector: " + this.director + "\n\tAÃ±o de salida: " + this.anno + "\n\tSinopsis: " + this.sinopsis + "\n\tGÃ©nero: " + this.genero;
 	}
 
 	/** 
@@ -57,6 +57,11 @@ public class Pelicula{
    	 */
 	public String getTitulo(){
 		return this.titulo;
+	}
+	
+	public boolean equals(Pelicula p) {
+		return this.titulo.equals(p.titulo) && this.director.equals(p.director) && this.anno == p.anno &&
+				this.sinopsis.equals(p.sinopsis) && this.genero == p.genero;
 	}
 }
 
