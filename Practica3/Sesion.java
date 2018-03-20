@@ -105,15 +105,20 @@ public class Sesion{
    	 */
 	public String toString(){
 		return "Sesión de la película " + pelicula.getTitulo() + 
-		" a las " + fecha + " en la sala " + sala.getId() + ".";
+		" el dia " + fecha + " en la sala " + sala.getId() + ".";
 	}
 	
 	/**
 	 * Compara dos Sesion para ver si son o no la misma.
 	 * @return boolean con true si son la misma y false en caso contrario.
 	 * */
-	public boolean equals(Sesion s) {
-		return this.sala.equals(s.sala) && this.pelicula.equals(s.pelicula) &&
+	@Override
+	public boolean equals(Object o) {
+		if(!(o instanceof Sesion)) {
+			return false;
+		}
+		Sesion s = (Sesion) o;
+		return s != null && this.sala.equals(s.sala) && this.pelicula.equals(s.pelicula) &&
 				this.fecha.equals(s.fecha) && this.butacasReservadas == s.butacasReservadas;
 	}
 }

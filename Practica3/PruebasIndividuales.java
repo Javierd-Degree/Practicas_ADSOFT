@@ -16,10 +16,19 @@ public class PruebasIndividuales{
 
 	/** 
 	 * Main que realiza pruebas unitarias de las clases Pelicula, Sesion y Sala.
+	 * Creamos dos peliculas y comprobamos si son o no correctas.
+	 * Creamos dos salas, con numero de butacas positivo y negativo, y comprobamos
+	 * si son o no correctas y las imprimimos.
+	 * Creamos dos sesiones. Una valida (numero de butacas reservadas positivo)
+	 * y otra no valida (numero de butacas reservadas negativo), y las validamos.
+	 * Anadimos dichas sesiones a la sala, para ver que al tener la misma fecha
+	 * no se pueden anadir ambas. Esto prueba el metodo anadirSesion de sala, pues
+	 * no se puede probar sin usar Sala.
+	 * Imprimimos la sesion valida.
    	 * @param args Array de strings que el usuario pasa por teclado (se ignora)
    	 */
 	public static void main(String[] args) {
-		/*Creamos dos peliculas y comprobamos si son o no correctas.
+		/*
 		TODO ¿Comprobar en toString de pelicula si es o no valida?*/
 		Pelicula p = new Pelicula("Cars 2",
 			"John Lasseter", 2011, 
@@ -33,34 +42,32 @@ public class PruebasIndividuales{
 		System.out.println("¿Es valida la película 2?: " + p2.validar());
 		System.out.println(p2 + "\n");
 
+		System.out.println("¿Son p1 y p1 la misma película? " + p.equals(p));
+		System.out.println("¿Son p1 y p2 la misma película? " + p.equals(p2) + "\n");
+		
 		/**
-		 * Creamos dos salas e imprimimos sus ids.
 		 * TODO Mirar si incuimos en toString el validar.
 		 */
 		Sala s = new Sala(1, 123);
-		Sala s2 = new Sala(2, -66);
-		System.out.println("Creada sala con id: " + s);
+		System.out.println("Creada sala con id: " + s + " y 123 butacas.");
 		System.out.println("¿Es valida la sala 1?: " + s.validar());
-
-		System.out.println("Creada sala con id: " + s2 + "\n");
+		Sala s2 = new Sala(2, -66);
+		System.out.println("Creada sala con id: " + s2 + " y -66 butacas.");
 		System.out.println("¿Es valida la sala 2?: " + s2.validar());
+		System.out.println("¿Son s1 y s1 la misma sala? " + s.equals(s));
+		System.out.println("¿Son s1 y s2 la misma sala? " + s.equals(s2) + "\n");
 
-		/**
-		 * Creamos dos sesiones. Una valida (numero de butacas reservadas positivo)
-		 * y otra no valida (numero de butacas reservadas negativo), y las validamos.
-		 * Anadimos dichas sesiones a la sala, para ver que al tener la misma fecha
-		 * no se pueden anadir ambas. Esto prueba el metodo anadirSesion de sala, pues
-		 * no se puede crear sin usar Sala.
-		 * Imprimimos la sesion valida.
-		 */
 		Sesion se = new Sesion(LocalDate.of(2018, 3, 29), p, s, 0);
 		Sesion se2 = new Sesion(LocalDate.of(2018, 3, 29), p, s, -5);
 		System.out.println("¿Es valida la sesión 1?: " + se.validar());
 		System.out.println("¿Es valida la sesión 2?: " + se2.validar());
-		System.out.println("\nAñadimos una sesion que aun no esta añadida: " + s.anadirSesion(se));
-		System.out.println("Añadimos otra sesion en la misma fecha: " + s.anadirSesion(se));
-		System.out.println(se);
-		System.out.println("\nVendemos menos entradas de las disponibles: " + se.actualizarButacasVendidas(10));
+		System.out.println("¿Son se1 y se1 la misma sesión? " + se.equals(se));
+		System.out.println("¿Son se1 y se2 la misma sesión? " + se.equals(se2) + "\n");
+		System.out.println("Imprimimos la sesión: " + se);
+		System.out.println("Vendemos menos entradas de las disponibles: " + se.actualizarButacasVendidas(10));
 		System.out.println("Vendemos mas entradas de las disponibles: " + se.actualizarButacasVendidas(200));
+		
+		System.out.println("\nAñadimos a una sala una sesion que aun no esta añadida: " + s.anadirSesion(se));
+		System.out.println("Añadimos otra sesion en la misma fecha: " + s.anadirSesion(se));
 	}
 }

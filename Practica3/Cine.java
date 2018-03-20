@@ -56,11 +56,10 @@ public class Cine{
 			return null;
 		}
 		
-		for(Pelicula p  : this.peliculas){
-			if(p.equals(pelicula)) {
-				return null;
-			}
+		if(this.peliculas.contains(pelicula)) {
+			return null;
 		}
+		
 		this.peliculas.add(pelicula);
 		return pelicula;
 	}
@@ -72,17 +71,15 @@ public class Cine{
 			return null;
 		}
 		
-		for(Sala s: this.salas) {
-			if(s.equals(sala)) {
-				return null;
-			}
+		if(this.salas.contains(sala)) {
+			return null;
 		}
+		
 		this.salas.add(sala);
 		return sala;
 	}
 	
-	/* TODO ¿No es mejor llamarlo crearSesion?
-	 * Crea una sesión con una película del array de películas en la fecha dad y la añade a la sala dada*/
+	/* Crea una sesión con una película del array de películas en la fecha dad y la añade a la sala dada*/
 	public Sesion crearSesion(Sala sala, Pelicula pelicula, LocalDate fechaSesion) {
 		Sesion sesion = new Sesion(fechaSesion, pelicula, sala, 0);
 		if(sesion.validar() == false){
@@ -129,20 +126,25 @@ public class Cine{
 
 	/* Quita una película del array de películas del cine*/
 	public boolean quitarPeliculaCartelera(Pelicula pelicula){
-		for(Pelicula p : this.peliculas){
-			if(pelicula.equals(p)){
-				this.peliculas.remove(p);
-				break;
-			}
+		/*Quitamos la película de la cartelera*/
+		if(this.peliculas.contains(pelicula)) {
+			this.peliculas.remove(pelicula);
+		}else {
+			return false;
 		}
+		
+		/*Quitamos las sesiones en las que aparece dicha película*/
+		boolean result = true;
 		for(Sala sala : this.salas){
+			List<Sesion> temp = new ArrayList<>();
 			for(Sesion sesion : sala.getSesiones()){
 				if(pelicula.equals(sesion.getPelicula())){
-					sala.getSesiones().remove(sesion);
+					temp.add(sesion);
 				}
 			}
+			result = result && sala.getSesiones().removeAll(temp);
 		}
-		return true;
+		return result;
 	}
 
 	public String toString() {

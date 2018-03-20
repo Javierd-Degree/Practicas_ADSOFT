@@ -67,7 +67,7 @@ public class Sala{
 		for(Sesion ses : this.sesiones){
 			if(ses.getFecha().equals(sesion.getFecha())) return false;
 		}
-		(this.sesiones).add(sesion);
+		this.sesiones.add(sesion);
 		return true;
 	}
 
@@ -83,8 +83,13 @@ public class Sala{
 	 * Compara dos Sala para ver si son o no la misma.
 	 * @return boolean con true si son la misma y false en caso contrario.
 	 * */
-	public boolean equals(Sala s) {
-		return this.id == s.id && this.butacas == s.butacas;
+	@Override
+	public boolean equals(Object o) {
+		if(!(o instanceof Sala)) {
+			return false;
+		}
+		Sala s = (Sala) o;
+		return  s != null && this.id == s.id && this.butacas == s.butacas;
 	}
 }
 

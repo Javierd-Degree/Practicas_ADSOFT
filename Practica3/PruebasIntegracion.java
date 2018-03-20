@@ -1,4 +1,4 @@
-
+import java.time.LocalDate;
 
 /**
  * Esta clase implementa todas las pruebas para evaluar el correcto
@@ -9,6 +9,14 @@
  * @author Estudiante EPS Javier.lopezcano@estudiante.uam.es
  *
 */
+
+/**
+ * TODO Apuntar en memoria: En las funciones de crearSala etc, devolvemos la sala ara que se
+ * pueda usar luego directamente, o bien null, de forma que no es necesario crear las clases
+ * fuera del cine. Por esto, es los print de las pruebas de integracion imprimimos si el
+ * resultado es o no null, para que se vea más facilmente el correcto funcionamiento de las 
+ * clases.
+ */
 
 public class PruebasIntegracion {
 	
@@ -31,21 +39,25 @@ public class PruebasIntegracion {
 		 * su correcto funcionamiento en las pruebas unitarias.
 		 * 
 		 * */
+		Pelicula p = cine.crearPelicula("Cars", "John Lasseter", 2011, "Película infantil de coches.",
+				Genero.DIBUJOS);
 		System.out.println("\nAñadimos una película al cine: " +
-				cine.crearPelicula("Cars", "John Lasseter", 2011, "Película infantil de coches.",
-				Genero.DIBUJOS));
+				(p != null));
 		System.out.println("Intentamos volver a añadir la misma película: " +
-				cine.crearPelicula("Cars", "John Lasseter", 2011, "Película infantil de coches.",
-				Genero.DIBUJOS));
+				(cine.crearPelicula("Cars", "John Lasseter", 2011, "Película infantil de coches.",
+				Genero.DIBUJOS) != null));
 		System.out.println("Intentamos añadir una película no válida: " +
-				cine.crearPelicula("Nada", "", -2011, "",
-				Genero.SUSPENSE));
+				(cine.crearPelicula("Nada", "", -2011, "",
+				Genero.SUSPENSE) != null));
 		
-		System.out.println("\nAñadimos una nueva sala al cine: " + cine.crearSala(9, 124));
-		System.out.println("Intentamos volver a añadir la misma sala: " + cine.crearSala(9, 124));
-		System.out.println("Intentamos añadir una sala no válida: " + cine.crearSala(7, -124));
+		/*Guardamos la sala simplemente para añadirla a la sesión luego.*/
+		Sala s = cine.crearSala(9, 124);
+		System.out.println("\nAñadimos una nueva sala al cine: " + (s != null));
+		System.out.println("Intentamos volver a añadir la misma sala: " + (cine.crearSala(9, 124) != null));
+		System.out.println("Intentamos añadir una sala no válida: " + (cine.crearSala(7, -124) != null));
 	
-		/*TODO Añadirpelicula, vender entrada ... quitarPeliculaCartelera*/
+		/*Guardamos la sesión simplemente para vender entradas luego.*/
+		Sesion se = cine.crearSesion(s, p, LocalDate.of(2018, 3, 29));
 		
 		/*TODO Añadir mas peliculas, sesiones y salas para la prueba*/
 		System.out.println(cine.infoCartelera());
