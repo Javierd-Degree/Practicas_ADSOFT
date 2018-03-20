@@ -4,7 +4,7 @@
 * @author Estuiante EPS Javier.lopezcano@estudiante.uam.es
 */
 
-/*TODO Añadir la pelicula de la que es la entrada?*/
+/*TODO AÃ±adir la pelicula de la que es la entrada?*/
 
 public class Entrada{
 	double precio;

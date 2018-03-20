@@ -20,6 +20,7 @@ public class EntradaDiaEspectador extends Entrada{
 	/**
 	* Getter del precio de la entrada, incluyendo el descuento por ser el dia del espectador.
 	* @return Precio de la entrada con descuento.
+	* TODO Redondear el precio con dos decimales.
 	*/
 	public double getPrecio(){
 		return this.precio * (1 - this.descuento);

@@ -99,6 +99,47 @@ public class Cine{
 		return -1;
 	}
 	
+	/*Crea una entrada normal o del dia del espectador*/
+	public double venderEntradas(double precio, double descuento, Sesion sesion){
+		Entrada e;
+		if(descuento == 0) {
+			e = new Entrada(precio);
+		}else {
+			e = new EntradaDiaEspectador(precio, descuento);
+		}
+		
+		if(sesion.actualizarButacasVendidas(1)==true){
+			this.entradas.add(e);
+			return e.getPrecio();
+		}
+		
+		return -1;
+	}
+	
+	/*Crea una serie de entradas normales o del dia del espectador*/
+	public double venderEntradas(int numero, double precio, double descuento, Sesion sesion){
+		if(sesion.actualizarButacasVendidas(numero) == false) {
+			return -1;
+		}
+		
+		double total = 0;
+		for(int i = 0; i < numero; i++) {
+			Entrada e;
+			if(descuento == 0) {
+				e = new Entrada(precio);
+			}else {
+				e = new EntradaDiaEspectador(precio, descuento);
+			}
+			
+			total += e.getPrecio();
+			if (this.entradas.add(e) == false) {
+				return -1;
+			}
+		}
+		
+		return total;
+	}
+	
 	/*Vender varias entradas*/
 	/*TODO ver si creamos las entradas dentro*/
 	public double venderEntradas(List<Entrada> entradas, Sesion sesion){
@@ -153,19 +194,21 @@ public class Cine{
 	
 	/*Imprime la lista de películas del cine*/
 	public String infoCartelera(){
-		String text = "Cartelera del cine " + nombre + ", " + direccion + "\n";
+		String text = "Cartelera del cine " + nombre + ", " + direccion + ":\n";
 		for(Pelicula pelicula : this.peliculas){
-			text += pelicula + "\n";
+			text += pelicula + "\n\n";
 		}
 		return text;
 	}
 
 	/*Imprime la información de todas las sesiones del cine*/
 	public String infoSesiones(){
-		String text = "Sesiones del cine " + nombre + ", " + direccion + "\n";
+		String text = "Sesiones del cine " + nombre + ", " + direccion + ":\n";
 		for(Sala sala : this.salas){
-			for(Sesion sesion : sala.getSesiones())
-				text += sesion;
+			text += "\t";
+			for(Sesion sesion : sala.getSesiones()) {
+				text += sesion + "\n\t";
+			}
 		}
 		return text;
 	}
@@ -173,11 +216,11 @@ public class Cine{
 	/*Imprime la información de todas las sesiones para una determinada película*/
 	public String infoSesionesPelicula(Pelicula pelicula){
 		String text = "Sesiones en el cine " + nombre + ", " + direccion + 
-				"de la película " + pelicula.getTitulo() + "\n";
+				", de la película " + pelicula.getTitulo() + "\n";
 		for(Sala sala : this.salas){
 			for(Sesion sesion : sala.getSesiones()){
 				if(pelicula.equals(sesion.getPelicula())){
-					text += sesion;
+					text += "\t" + sesion;
 				}
 			}
 		}

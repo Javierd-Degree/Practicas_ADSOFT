@@ -58,10 +58,37 @@ public class PruebasIntegracion {
 	
 		/*Guardamos la sesión simplemente para vender entradas luego.*/
 		Sesion se = cine.crearSesion(s, p, LocalDate.of(2018, 3, 29));
+		System.out.println("\nAñadimos una nueva sesión al cine: " + (se != null));
+		System.out.println("Intentamos volver a añadir la misma sesión al cine: " + 
+				(cine.crearSesion(s, p, LocalDate.of(2018, 3, 29)) != null));
+		System.out.println("Intentamos añadir una sesión no válida al cine: " + 
+				(cine.crearSesion(s, null, LocalDate.of(2018, 3, 29)) != null));
+		/*Llamamos a la función aquí para simplicar el código */
+		Pelicula p2 = cine.crearPelicula("Cars 2", "John Lasseter", 2016, "Película infantil de coches.",
+				Genero.ACCION);
+		System.out.println("Intentamos añadir una sesión distinta, pero que concide en sala y fecha con la primera: " + 
+				(cine.crearSesion(s, p2, LocalDate.of(2018, 3, 29)) != null));
+		/*Guardamos para vender entradas posteriormente.*/
+		Sesion se2 = cine.crearSesion(s, p2, LocalDate.of(2018, 5, 29));
+		System.out.println("Añadimos otra sesión en misma sala y distinta fecha: " + 
+				(se2 != null) + "\n");
 		
-		/*TODO Añadir mas peliculas, sesiones y salas para la prueba*/
+		System.out.println("Vendemos una entrada normal de la primera sesión: " + cine.venderEntradas(9.99, 0, se));
+		System.out.println("Vendemos una entrada del dia del espectador de la primera sesión: " + cine.venderEntradas(9.99, 0.2, se));
+		System.out.println("Vendemos cinco entradas normales de la segunda sesión: " + cine.venderEntradas(5, 9.99, 0, se2));
+		System.out.println("Vendemos diez entradas del dia del espectador de la segunda sesión: " + cine.venderEntradas(10, 9.99, 0.2, se2));
+		System.out.println("Intentamos vender mas entradas de las disponibles en la segunda sesión: " + cine.venderEntradas(10000, 9.99, 0, se2) + "\n");
+		System.out.println("La recaudación total del cine es: " + cine.recaudacion() + "\n");
+		
 		System.out.println(cine.infoCartelera());
 		System.out.println(cine.infoSesiones());
 		/*TODO infoSesionesPelicula*/
+		System.out.println("Buscamos las sesiones en las que está la película Cars:");
+		System.out.println(cine.infoSesionesPelicula(p) + "\n");
+		
+		/*TODO Quitar la película de varias sesiones, no solo de una.*/
+		System.out.println("Quitamos la película Cars de la cartelera: " + cine.quitarPeliculaCartelera(p));
+		System.out.println(cine.infoCartelera());
+		System.out.println(cine.infoSesiones());
 	}
 }
