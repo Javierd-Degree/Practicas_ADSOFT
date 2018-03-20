@@ -11,7 +11,6 @@ import java.time.LocalDate;
 */
 
 /**
- * TODO Cambiar funciones info que imprimen por un String, con return
  * Getters para devolver todas las películas y/o poder buscar por titulo.
  * de la pelicula, por ejemplo.
  */
@@ -51,45 +50,45 @@ public class Cine{
 	/*TODO comprobar en las funciones necesarias que las salas, pelis... est�n en los arrays del cine*/
 	/*TODO poner los params y returns para javadoc*/
 	/*Creamos una pelicula y la añadimos a la lista de películas del cine*/
-	public boolean crearPelicula(String titulo, String director, int anno, String sinopsis, Genero genero) {
+	public Pelicula crearPelicula(String titulo, String director, int anno, String sinopsis, Genero genero) {
 		Pelicula pelicula = new Pelicula(titulo, director, anno, sinopsis, genero);
 		if(pelicula.validar() == false) {
-			return false;
+			return null;
 		}
 		
 		for(Pelicula p  : this.peliculas){
 			if(p.equals(pelicula)) {
-				return false;
+				return null;
 			}
 		}
 		this.peliculas.add(pelicula);
-		return true;
+		return pelicula;
 	}
 	
 	/*Crea una sala y la añade a la lista de salas. Comprobamos si esta o no añadida*/
-	public boolean crearSala(int id, int butacas) {
+	public Sala crearSala(int id, int butacas) {
 		Sala sala = new Sala(id, butacas);
 		if(sala.validar() == false) {
-			return false;
+			return null;
 		}
 		
 		for(Sala s: this.salas) {
 			if(s.equals(sala)) {
-				return false;
+				return null;
 			}
 		}
 		this.salas.add(sala);
-		return true;
+		return sala;
 	}
 	
 	/* TODO ¿No es mejor llamarlo crearSesion?
 	 * Crea una sesión con una película del array de películas en la fecha dad y la añade a la sala dada*/
-	public boolean anadirPeliculaSala(Sala sala, Pelicula pelicula, LocalDate fechaSesion) {
+	public Sesion crearSesion(Sala sala, Pelicula pelicula, LocalDate fechaSesion) {
 		Sesion sesion = new Sesion(fechaSesion, pelicula, sala, 0);
 		if(sesion.validar() == false){
-			return false;
+			return null;
 		}
-		return sala.anadirSesion(sesion);
+		return (sala.anadirSesion(sesion) == true) ? sesion : null;
 	}
 
 	/*Vender 1 entrada*/
