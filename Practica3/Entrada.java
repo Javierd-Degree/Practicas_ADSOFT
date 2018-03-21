@@ -7,7 +7,7 @@
 /*TODO Añadir la pelicula de la que es la entrada?*/
 
 public class Entrada{
-	double precio;
+	private double precio;
 
 	/*TODO Validar comprobar que el precio sea mayor que cero*/
 	

@@ -155,13 +155,14 @@ public class Cine{
 		return -1;
 	}
 
-	/*El campo entrada de Cine indica las entradas vendidas*/
+	/*El campo entrada de Cine indica las entradas vendidas
+	 * Redondeamos a dos cifras decimales*/
 	public double recaudacion(){
 		double rec = 0;
 		for(Entrada entrada : this.entradas){
 			rec += entrada.getPrecio();
 		}
-		return rec;
+		return (double) Math.round(rec * 100) / 100;
 	}
 
 
