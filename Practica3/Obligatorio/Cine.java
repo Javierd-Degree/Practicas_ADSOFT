@@ -10,11 +10,6 @@ import java.time.LocalDate;
  *
 */
 
-/**
- * Getters para devolver todas las peliculas y/o poder buscar por titulo.
- * de la pelicula, por ejemplo.
- */
-
 public class Cine{
 	private String nombre;
 	private String direccion;
@@ -23,7 +18,7 @@ public class Cine{
 	private List<Entrada> entradas;
 
 	/** 
-	 * Constructor sin listas ya que a estas se les va anadiendo elementos despues.
+	 * Constructor de la clase cine sin listas ya que a estas se les va anadiendo elementos despues.
    	 * @param nombre Nombre del cine.
    	 * @param direccion Direccion del cine.
    	 */
@@ -48,14 +43,14 @@ public class Cine{
 	}
 	
 	/**
-	 * Metodo que crea una pelicula y, si no está aun, la anade al array 
-	 * de peliculas del cine (Cartelera)
+	 * Metodo que crea una Pelicula y, si no esta aun, y es valida, la anade al array 
+	 * de peliculas del cine.
 	 * @param titulo Titulo de la pelicula que se va a crear
 	 * @param director Director de la pelicula
 	 * @param anno Anno de estreno de la pelicula
 	 * @param sinopsis Resumen de la pelicula
 	 * @param genero Genero de la pelicula
-	 * @return Pelicula creada
+	 * @return Pelicula creada o null si ya estaba insertada o si no era valida.
 	 */
 	public Pelicula crearPelicula(String titulo, String director, int anno, String sinopsis, Genero genero) {
 		Pelicula pelicula = new Pelicula(titulo, director, anno, sinopsis, genero);
@@ -73,10 +68,10 @@ public class Cine{
 	
 	/**
 	 * Metodo que crea una nueva sala y la anade al cine,
-	 * comprobando antes que la sala no existe ya
+	 * comprobando antes que la sala no existe ya, y que es valida.
 	 * @param id Numero de identificacion de la sala
 	 * @param butacas Numero de butacas de la sala
-	 * @return Sala creada
+	 * @return Sala creada o null si ya estaba insertada o si no era valida.
 	 */
 	public Sala crearSala(int id, int butacas) {
 		Sala sala = new Sala(id, butacas);
@@ -94,11 +89,11 @@ public class Cine{
 	
 	/**
 	 * Metodo que crea una nueva sesion de una pelicula en el en la sala deseada del cine
-	 * en la fecha introdicida como argumento.
-	 * @param sala Sala en la que se quiere añadir la sesion
+	 * en la fecha introdicida como argumento,.
+	 * @param sala Sala en la que se quiere anadir la sesion
 	 * @param pelicula Pelicula para la que se quiere crear la sesion
 	 * @param fechaSesion Fecha de la sesion que se quiere crear
-	 * @return Sesion creada o null si no se ha podido crear o anadir correctamente a la sala
+	 * @return Sesion creada o null si no se ha podido crear o anadir correctamente a la sala, o si no es valida.
 	 */
 	public Sesion crearSesion(Sala sala, Pelicula pelicula, LocalDate fechaSesion) {
 		Sesion sesion = new Sesion(fechaSesion, pelicula, sala, 0);
@@ -109,20 +104,33 @@ public class Cine{
 	}
 	
 	/**
-	 * Metodo que crea una entrada que se va a vender y la anade al array de entradas del
-	 * cine y devuelve el precio de la entrada
+	 * Metodo que crea una entrada normal que se va a vender, la anade al array de entradas del
+	 * cine y devuelve el precio de la entrada.
 	 * @param precio Precio de la entrada
-	 * @param descuento Descuento que se aplica a la venta de la entrada si lo tiene
 	 * @param sesion Sesion a la que corresponde la entrada
 	 * @return Precio de la entrada vendida
 	 */
-	public double venderEntradas(double precio, double descuento, Sesion sesion){
-		Entrada e;
-		if(descuento == 0) {
-			e = new Entrada(precio);
-		}else {
-			e = new EntradaDiaEspectador(precio, descuento);
+	public double venderEntradas(double precio, Sesion sesion){
+		Entrada e = new Entrada(precio);
+		
+		if(sesion.actualizarButacasVendidas(1)==true){
+			this.entradas.add(e);
+			return e.getPrecio();
 		}
+		
+		return -1;
+	}
+
+	/**
+	 * Metodo que crea una entrada del dia del espectador que se va a vender, la anade al array de entradas del
+	 * cine y devuelve el precio de la entrada.
+	 * @param precio Precio de la entrada
+	 * @param descuento Descuento que se aplica a la venta de la entrada del dia del espectador.
+	 * @param sesion Sesion a la que corresponde la entrada.
+	 * @return Precio de la entrada vendida.
+	 */
+	public double venderEntradas(double precio, double descuento, Sesion sesion){
+		Entrada e = new EntradaDiaEspectador(precio, descuento);
 		
 		if(sesion.actualizarButacasVendidas(1)==true){
 			this.entradas.add(e);
@@ -133,11 +141,37 @@ public class Cine{
 	}
 	
 	/**
-	 * Metodo que crea varias entradas que se van a vender y las añade al array de entradas del
-	 * cine y devuelve el precio total de estas
+	 * Metodo que crea varias entradas normales que se van a vender y las anade al array de entradas del
+	 * cine y devuelve el precio total de estas.
 	 * @param numero Numero de entradas que se van a vender
 	 * @param precio Precio de cada una de las entradas
-	 * @param descuento Descuento que se aplica a la venta de las entradas si lo tienen
+	 * @param sesion Sesion a la que corresponden las entradas
+	 * @return Precio que se debe pagar por las entradas
+	 */
+	public double venderEntradas(int numero, double precio, Sesion sesion){
+		if(sesion.actualizarButacasVendidas(numero) == false) {
+			return -1;
+		}
+		
+		double total = 0;
+		for(int i = 0; i < numero; i++) {
+			Entrada e = new Entrada(precio);
+			
+			total += e.getPrecio();
+			if (this.entradas.add(e) == false) {
+				return -1;
+			}
+		}
+		
+		return total;
+	}
+
+	/**
+	 * Metodo que crea varias entradas del dia del espectador que se van a vender y las
+	 * anade al array de entradas del cine y devuelve el precio total de estas.
+	 * @param numero Numero de entradas que se van a vender
+	 * @param precio Precio de cada una de las entradas
+	 * @param descuento Descuento que se aplica a la venta de las entradas del dia del espectador
 	 * @param sesion Sesion a la que corresponden las entradas
 	 * @return Precio que se debe pagar por las entradas
 	 */
@@ -148,12 +182,7 @@ public class Cine{
 		
 		double total = 0;
 		for(int i = 0; i < numero; i++) {
-			Entrada e;
-			if(descuento == 0) {
-				e = new Entrada(precio);
-			}else {
-				e = new EntradaDiaEspectador(precio, descuento);
-			}
+			Entrada e = new EntradaDiaEspectador(precio, descuento);
 			
 			total += e.getPrecio();
 			if (this.entradas.add(e) == false) {
@@ -181,11 +210,12 @@ public class Cine{
 
 
 	/**
-	 * Metodo que quita una determinada pelicula del array de peliculas del cine
+	 * Metodo que quita una determinada pelicula del array de peliculas del cine,
+	 * eliminando tambien todas las sesiones de dicha pelicula.
 	 * @param pelicula Pelicula que se va a quitar de la cartelera
-	 * @return Boolean que indica si la pelicula se ha eliminado correctamente o no
+	 * @return boolean que indica si la pelicula se ha eliminado correctamente o no
 	 */
-	public boolean quitarPeliculaCartelera(Pelicula pelicula){
+	public boolean quitarPeliculaCine(Pelicula pelicula){
 		/*Quitamos la pelicula de la cartelera*/
 		if(this.peliculas.contains(pelicula)) {
 			this.peliculas.remove(pelicula);
@@ -213,9 +243,9 @@ public class Cine{
 	 */
 	public String toString() {
 		if(this.validar() == true) {
-			return "Cine " + nombre + " en la dirección " + direccion + "\n";
+			return "Cine " + nombre + " en la direcciÃ³n " + direccion + "\n";
 		}
-		return "\tEl cine no es válido.";
+		return "\tEl cine no es vÃ¡lido.";
 	}
 	
 	/**
@@ -235,9 +265,8 @@ public class Cine{
 	 * @return String con los datos de las sesiones del cine
 	 */
 	public String infoSesiones(){
-		String text = "Sesiones del cine " + nombre + ", " + direccion + ":\n";
+		String text = "Sesiones del cine " + nombre + ", " + direccion + ":\n\t";
 		for(Sala sala : this.salas){
-			text += "\t";
 			for(Sesion sesion : sala.getSesiones()) {
 				text += sesion + "\n\t";
 			}
@@ -253,11 +282,11 @@ public class Cine{
 	 */
 	public String infoSesionesPelicula(Pelicula pelicula){
 		String text = "Sesiones en el cine " + nombre + ", " + direccion + 
-				", de la película " + pelicula.getTitulo() + "\n";
+				", de la pelÃ­cula " + pelicula.getTitulo() + "\n\t";
 		for(Sala sala : this.salas){
 			for(Sesion sesion : sala.getSesiones()){
 				if(pelicula.equals(sesion.getPelicula())){
-					text += "\t" + sesion;
+					text += sesion + "\n\t";
 				}
 			}
 		}

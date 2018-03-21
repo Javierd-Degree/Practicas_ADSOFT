@@ -8,15 +8,6 @@ import java.time.LocalDate;
 
 public class Sesion{
 
-	/*MEMORIA
-	En vez usar un int con buatacasDisponibles, usamos 
-	el getter de Sala para coger las butacas que tiene.
-	Así nos evitamos repetir datos, y en caso de que la
-	sala aumente su numero de butacas por ejemplo, no hace falta
-	cambiar la sesion.
-	Usamos entonces un int que sea butacasReservadas.
-	*/
-
 	LocalDate fecha;
 	Pelicula pelicula;
 	Sala sala;
@@ -33,19 +24,6 @@ public class Sesion{
 		this.fecha = fecha;
 		this.pelicula = pelicula;
 		this.sala = sala;
-		this.butacasReservadas = butacasReservadas;
-	}
-
-	/**
-	* TODO QUITAR PORQUE EN EL CINE NO PODEMOS ACCEDER SIN TENER LA SALA
-	* Constructor de la clase Sesion sin pelicula, de forma que pueda anadir la sesion luego.
-	* @param fecha Fecha de la sesion.
-	* @param pelicula Pelicula que se va a reproducir en la sesion
-	* @param butacas Numero de butacas butacasReservadas
-	*/
-	public Sesion(LocalDate fecha, Pelicula pelicula, int butacasReservadas){
-		this.fecha = fecha;
-		this.pelicula = pelicula;
 		this.butacasReservadas = butacasReservadas;
 	}
 	
@@ -104,8 +82,11 @@ public class Sesion{
    	 * @return Un string con todos los datos de la sesion.
    	 */
 	public String toString(){
-		return "Sesión de la película " + pelicula.getTitulo() + 
-		" el dia " + fecha + " en la sala " + sala.getId() + ".";
+		if(this.validar()==true){
+			return "Sesión de la película " + pelicula.getTitulo() + 
+					" el día " + fecha + " en la sala " + sala.getId() + ".";
+		}
+		return "\tSesión no válida.";
 	}
 	
 	/**

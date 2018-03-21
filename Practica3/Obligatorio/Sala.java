@@ -59,9 +59,9 @@ public class Sala{
 	}
 
 	/** 
-	 * AÒade una sesion a la lista de sesiones de la sala.
-   	 * @param sesion Sesion que se quiere aÒadir a la lita de sesiones de la sala.
-   	 * @return Boolean que indica si se ha podido o no a√±adir la sesiÛn a la lista comprobando las fechas.
+	 * Anade una sesion a la lista de sesiones de la sala.
+   	 * @param sesion Sesion que se quiere anadir a la lita de sesiones de la sala.
+   	 * @return Boolean que indica si se ha podido o no a√±adir la sesion a la lista comprobando las fechas.
    	 */
 	public boolean anadirSesion(Sesion sesion){
 		for(Sesion ses : this.sesiones){
@@ -79,7 +79,7 @@ public class Sala{
 		if(this.validar()==true) {
 			return String.valueOf(id);
 		}
-		return "\tSala no v·lida.";
+		return "\tSala no v√°lida.";
 	}
 	
 	/**

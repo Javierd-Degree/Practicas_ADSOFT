@@ -15,7 +15,7 @@ public enum Genero{
 	private final String nombre;
 	
 	/**
-	 * Metodo que devuelve una string con el nombre del genero
+	 * Metodo que devuelve un string con el nombre del genero
 	 * @return String con el nombre del genero
 	 */
 	public String toString() {

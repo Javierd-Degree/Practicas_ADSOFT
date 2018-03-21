@@ -8,9 +8,9 @@ public class EntradaDescuento extends Entrada{
 	private Descuento descuento;
 
 	/**
-	* Constructor de la clase EntradaDiaEspectador.
+	* Constructor de la clase EntradaDescuento.
 	* @param precio Precio de la entrada a crear. 
-	* @param precio Descuento de la entrada a crear, dado como un numero entre 0 y 1.
+	* @param descuento Descuento de la entrada a crear.
 	*/
 	public EntradaDescuento(double precio, Descuento descuento){
 		super(precio);
@@ -18,10 +18,9 @@ public class EntradaDescuento extends Entrada{
 	}
 
 	/**
-	* Getter del precio de la entrada, incluyendo el descuento por ser el dia del espectador.
+	* Getter del precio de la entrada, incluyendo el descuento.
 	* Redondeamos con dos cifras decimales
 	* @return Precio de la entrada con descuento.
-	* TODO Redondear el precio con dos decimales.
 	*/
 	public double getPrecio(){
 		double precio = super.getPrecio() * (1 - this.descuento.getValor());

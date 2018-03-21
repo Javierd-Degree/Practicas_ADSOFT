@@ -70,9 +70,9 @@ public class PruebasIntegracion {
 				(cine.crearSesion(s2, p, LocalDate.of(2018, 5, 29)) != null) + "\n");
 		
 		System.out.println("Vendemos una entrada normal de la primera sesión: " + cine.venderEntradas(9.99, se));
-		System.out.println("Vendemos una entrada de estudiantes de la primera sesión: " + cine.venderEntradas(9.99, Descuento.ESTUDIANTE, se));
+		System.out.println("Vendemos una entrada del dia del espectador de la primera sesión: " + cine.venderEntradas(9.99, 0.2, se));
 		System.out.println("Vendemos cinco entradas normales de la segunda sesión: " + cine.venderEntradas(5, 9.99, se2));
-		System.out.println("Vendemos diez entradas del dia de fiesta de la segunda sesión: " + cine.venderEntradas(10, 9.99, Descuento.FIESTA, se2));
+		System.out.println("Vendemos diez entradas del dia del espectador de la segunda sesión: " + cine.venderEntradas(10, 9.99, 0.2, se2));
 		System.out.println("Intentamos vender mas entradas de las disponibles en la segunda sesión: " + cine.venderEntradas(10000, 9.99, se2) + "\n");
 		System.out.println("La recaudación total del cine es: " + cine.recaudacion() + "\n");
 		

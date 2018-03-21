@@ -49,9 +49,9 @@ public class Pelicula{
    	 */
 	public String toString(){
 		if(this.validar() == true) {
-			return "\tTÌtulo: " + this.titulo + "\n\tDirector: " + this.director + "\n\tAÒo de salida: " + this.anno + "\n\tSinopsis: " + this.sinopsis + "\n\tGÈnero: " + this.genero;	
+			return "\tT√≠tulo: " + this.titulo + "\n\tDirector: " + this.director + "\n\tA√±o de salida: " + this.anno + "\n\tSinopsis: " + this.sinopsis + "\n\tG√©nero: " + this.genero;	
 		}
-		return "\tPelÌcula no v·lida.";
+		return "\tPel√≠cula no v√°lida.";
 	}
 
 	/** 

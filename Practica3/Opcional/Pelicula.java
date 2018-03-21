@@ -1,5 +1,5 @@
 /**
- * Esta clase implementa una película de un cine.
+ * Esta clase implementa una pelicula de un cine.
  *
  * @author Estudiante EPS Javier.delgadod@estudiante.uam.es
  * @author Estudiante EPS Javier.lopezcano@estudiante.uam.es
@@ -31,7 +31,7 @@ public class Pelicula{
 
 	/**
 	* Valida si los datos de la pelicula son o no correctos. 
-	* Comprobamos que el año sea un numero positivo al menos y que los Strings no sean vacios.
+	* Comprobamos que el anno sea un numero positivo al menos y que los Strings no sean vacios.
 	* @retun boolean indicando si es o no valido.
 	*/
 	public boolean validar(){
@@ -48,7 +48,10 @@ public class Pelicula{
    	 * @return Un string con todos los datos de la pelicula.
    	 */
 	public String toString(){
-		return "\tTítulo: " + this.titulo + "\n\tDirector: " + this.director + "\n\tAño de salida: " + this.anno + "\n\tSinopsis: " + this.sinopsis + "\n\tGénero: " + this.genero;
+		if(this.validar() == true) {
+			return "\tTítulo: " + this.titulo + "\n\tDirector: " + this.director + "\n\tAño de salida: " + this.anno + "\n\tSinopsis: " + this.sinopsis + "\n\tGénero: " + this.genero;	
+		}
+		return "\tPelícula no válida.";
 	}
 
 	/** 

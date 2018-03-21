@@ -28,8 +28,6 @@ public class PruebasIndividuales{
    	 * @param args Array de strings que el usuario pasa por teclado (se ignora)
    	 */
 	public static void main(String[] args) {
-		/*
-		TODO ¿Comprobar en toString de pelicula si es o no valida?*/
 		Pelicula p = new Pelicula("Cars 2",
 			"John Lasseter", 2011, 
 			"Rayo McQueen y su amigo, la grua Mate, viajan al extranjero para participar en el primer Campeonato Mundial en el que se decidira cuál es el coche mas rápido del planeta.",
@@ -45,9 +43,6 @@ public class PruebasIndividuales{
 		System.out.println("¿Son p1 y p1 la misma película? " + p.equals(p));
 		System.out.println("¿Son p1 y p2 la misma película? " + p.equals(p2) + "\n");
 		
-		/**
-		 * TODO Mirar si incuimos en toString el validar.
-		 */
 		Sala s = new Sala(1, 123);
 		System.out.println("Creada sala con id: " + s + " y 123 butacas.");
 		System.out.println("¿Es valida la sala 1?: " + s.validar());
