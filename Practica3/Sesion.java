@@ -35,19 +35,6 @@ public class Sesion{
 		this.sala = sala;
 		this.butacasReservadas = butacasReservadas;
 	}
-
-	/**
-	* TODO QUITAR PORQUE EN EL CINE NO PODEMOS ACCEDER SIN TENER LA SALA
-	* Constructor de la clase Sesion sin pelicula, de forma que pueda anadir la sesion luego.
-	* @param fecha Fecha de la sesion.
-	* @param pelicula Pelicula que se va a reproducir en la sesion
-	* @param butacas Numero de butacas butacasReservadas
-	*/
-	public Sesion(LocalDate fecha, Pelicula pelicula, int butacasReservadas){
-		this.fecha = fecha;
-		this.pelicula = pelicula;
-		this.butacasReservadas = butacasReservadas;
-	}
 	
 	/**
 	* Valida si los datos de la sesion son o no correctos. 
@@ -104,8 +91,11 @@ public class Sesion{
    	 * @return Un string con todos los datos de la sesion.
    	 */
 	public String toString(){
-		return "SesiÃ³n de la pelÃ­cula " + pelicula.getTitulo() + 
-		" el dia " + fecha + " en la sala " + sala.getId() + ".";
+		if(this.validar()==true){
+			return "Sesión de la película " + pelicula.getTitulo() + 
+					" el día " + fecha + " en la sala " + sala.getId() + ".";
+		}
+		return "\tSesión no válida.";
 	}
 	
 	/**

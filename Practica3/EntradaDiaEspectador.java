@@ -21,7 +21,6 @@ public class EntradaDiaEspectador extends Entrada{
 	* Getter del precio de la entrada, incluyendo el descuento por ser el dia del espectador.
 	* Redondeamos con dos cifras decimales
 	* @return Precio de la entrada con descuento.
-	* TODO Redondear el precio con dos decimales.
 	*/
 	public double getPrecio(){
 		double precio = super.getPrecio() * (1 - this.descuento);

@@ -11,7 +11,7 @@ import java.time.LocalDate;
 */
 
 /**
- * Getters para devolver todas las películas y/o poder buscar por titulo.
+ * Getters para devolver todas las peliculas y/o poder buscar por titulo.
  * de la pelicula, por ejemplo.
  */
 
@@ -23,7 +23,7 @@ public class Cine{
 	private List<Entrada> entradas;
 
 	/** 
-	 * Constructor sin listas ya que a estas se ls va añadiendo elementos despues.
+	 * Constructor sin listas ya que a estas se les va anadiendo elementos despues.
    	 * @param nombre Nombre del cine.
    	 * @param direccion Direccion del cine.
    	 */
@@ -37,7 +37,7 @@ public class Cine{
 	
 	/**
 	* Valida si los datos del cine son o no correctos. 
-	* Comprobamos que los String de nombre y dirección no estén vacíos.
+	* Comprobamos que los String de nombre y direccion no esten vacios.
 	* @retun boolean indicando si es o no valido.
 	*/
 	public boolean validar(){
@@ -47,9 +47,16 @@ public class Cine{
 		return true;
 	}
 	
-	/*TODO comprobar en las funciones necesarias que las salas, pelis... est�n en los arrays del cine*/
-	/*TODO poner los params y returns para javadoc*/
-	/*Creamos una pelicula y la añadimos a la lista de películas del cine*/
+	/**
+	 * Metodo que crea una pelicula y, si no est� aun, la anade al array 
+	 * de peliculas del cine (Cartelera)
+	 * @param titulo Titulo de la pelicula que se va a crear
+	 * @param director Director de la pelicula
+	 * @param anno Anno de estreno de la pelicula
+	 * @param sinopsis Resumen de la pelicula
+	 * @param genero Genero de la pelicula
+	 * @return Pelicula creada
+	 */
 	public Pelicula crearPelicula(String titulo, String director, int anno, String sinopsis, Genero genero) {
 		Pelicula pelicula = new Pelicula(titulo, director, anno, sinopsis, genero);
 		if(pelicula.validar() == false) {
@@ -64,7 +71,13 @@ public class Cine{
 		return pelicula;
 	}
 	
-	/*Crea una sala y la añade a la lista de salas. Comprobamos si esta o no añadida*/
+	/**
+	 * Metodo que crea una nueva sala y la anade al cine,
+	 * comprobando antes que la sala no existe ya
+	 * @param id Numero de identificacion de la sala
+	 * @param butacas Numero de butacas de la sala
+	 * @return Sala creada
+	 */
 	public Sala crearSala(int id, int butacas) {
 		Sala sala = new Sala(id, butacas);
 		if(sala.validar() == false) {
@@ -79,7 +92,14 @@ public class Cine{
 		return sala;
 	}
 	
-	/* Crea una sesión con una película del array de películas en la fecha dad y la añade a la sala dada*/
+	/**
+	 * Metodo que crea una nueva sesion de una pelicula en el en la sala deseada del cine
+	 * en la fecha introdicida como argumento.
+	 * @param sala Sala en la que se quiere a�adir la sesion
+	 * @param pelicula Pelicula para la que se quiere crear la sesion
+	 * @param fechaSesion Fecha de la sesion que se quiere crear
+	 * @return Sesion creada o null si no se ha podido crear o anadir correctamente a la sala
+	 */
 	public Sesion crearSesion(Sala sala, Pelicula pelicula, LocalDate fechaSesion) {
 		Sesion sesion = new Sesion(fechaSesion, pelicula, sala, 0);
 		if(sesion.validar() == false){
@@ -87,19 +107,15 @@ public class Cine{
 		}
 		return (sala.anadirSesion(sesion) == true) ? sesion : null;
 	}
-
-	/*Vender 1 entrada*/
-	/*TODO ver si creamos las entradas dentro*/
-	public double venderEntradas(Entrada entrada, Sesion sesion){
-		if(sesion.actualizarButacasVendidas(1)==true){
-			this.entradas.add(entrada);
-			System.out.println(sesion);
-			return entrada.getPrecio();
-		}
-		return -1;
-	}
 	
-	/*Crea una entrada normal o del dia del espectador*/
+	/**
+	 * Metodo que crea una entrada que se va a vender y la anade al array de entradas del
+	 * cine y devuelve el precio de la entrada
+	 * @param precio Precio de la entrada
+	 * @param descuento Descuento que se aplica a la venta de la entrada si lo tiene
+	 * @param sesion Sesion a la que corresponde la entrada
+	 * @return Precio de la entrada vendida
+	 */
 	public double venderEntradas(double precio, double descuento, Sesion sesion){
 		Entrada e;
 		if(descuento == 0) {
@@ -116,7 +132,15 @@ public class Cine{
 		return -1;
 	}
 	
-	/*Crea una serie de entradas normales o del dia del espectador*/
+	/**
+	 * Metodo que crea varias entradas que se van a vender y las a�ade al array de entradas del
+	 * cine y devuelve el precio total de estas
+	 * @param numero Numero de entradas que se van a vender
+	 * @param precio Precio de cada una de las entradas
+	 * @param descuento Descuento que se aplica a la venta de las entradas si lo tienen
+	 * @param sesion Sesion a la que corresponden las entradas
+	 * @return Precio que se debe pagar por las entradas
+	 */
 	public double venderEntradas(int numero, double precio, double descuento, Sesion sesion){
 		if(sesion.actualizarButacasVendidas(numero) == false) {
 			return -1;
@@ -140,23 +164,13 @@ public class Cine{
 		return total;
 	}
 	
-	/*Vender varias entradas*/
-	/*TODO ver si creamos las entradas dentro*/
-	public double venderEntradas(List<Entrada> entradas, Sesion sesion){
-		int precio = 0;
-		if(sesion.actualizarButacasVendidas(entradas.size())==true){
-			System.out.println(sesion);
-			for(Entrada entrada : entradas) {
-				this.entradas.add(entrada);
-				precio += entrada.getPrecio();
-			}
-			return precio;
-		}
-		return -1;
-	}
-
-	/*El campo entrada de Cine indica las entradas vendidas
-	 * Redondeamos a dos cifras decimales*/
+	/**
+	 * Metodo que calcula la recaudacion total del cine a partir de las 
+	 * entradas vendidas teniendo en cuenta que el campo entradas del 
+	 * cine es un array de las entradas vendidas, y redondeando la 
+	 * recaudacion a 2 decimales
+	 * @return Recaudacion total del cine
+	 */
 	public double recaudacion(){
 		double rec = 0;
 		for(Entrada entrada : this.entradas){
@@ -166,16 +180,20 @@ public class Cine{
 	}
 
 
-	/* Quita una película del array de películas del cine*/
+	/**
+	 * Metodo que quita una determinada pelicula del array de peliculas del cine
+	 * @param pelicula Pelicula que se va a quitar de la cartelera
+	 * @return Boolean que indica si la pelicula se ha eliminado correctamente o no
+	 */
 	public boolean quitarPeliculaCartelera(Pelicula pelicula){
-		/*Quitamos la película de la cartelera*/
+		/*Quitamos la pelicula de la cartelera*/
 		if(this.peliculas.contains(pelicula)) {
 			this.peliculas.remove(pelicula);
 		}else {
 			return false;
 		}
 		
-		/*Quitamos las sesiones en las que aparece dicha película*/
+		/*Quitamos las sesiones en las que aparece dicha pelicula*/
 		boolean result = true;
 		for(Sala sala : this.salas){
 			List<Sesion> temp = new ArrayList<>();
@@ -189,11 +207,18 @@ public class Cine{
 		return result;
 	}
 
+	/**
+	 * Metodo que devuelve una string con la informacion del cine
+	 * @return String con la informacion del cine
+	 */
 	public String toString() {
-		return "Cine " + nombre + " en la dirección " + direccion + "\n";
+		return "Cine " + nombre + " en la direcci�n " + direccion + "\n";
 	}
 	
-	/*Imprime la lista de películas del cine*/
+	/**
+	 * Metodo que devuelve una string con la cartelera (Array de peliculas) del cine
+	 * @return String con las peliculas de la cartelera del cine
+	 */
 	public String infoCartelera(){
 		String text = "Cartelera del cine " + nombre + ", " + direccion + ":\n";
 		for(Pelicula pelicula : this.peliculas){
@@ -202,7 +227,10 @@ public class Cine{
 		return text;
 	}
 
-	/*Imprime la información de todas las sesiones del cine*/
+	/**
+	 * Metodo que devuelve una string con los datos de todas las sesiones del cine
+	 * @return String con los datos de las sesiones del cine
+	 */
 	public String infoSesiones(){
 		String text = "Sesiones del cine " + nombre + ", " + direccion + ":\n";
 		for(Sala sala : this.salas){
@@ -214,10 +242,15 @@ public class Cine{
 		return text;
 	}
 
-	/*Imprime la información de todas las sesiones para una determinada película*/
+	/**
+	 * Metodo que devuelve una string con la informacion de todas las sesiones del cine
+	 * de una determinada pelicula
+	 * @param pelicula Pelicula a la que corresponden las sesiones 
+	 * @return String con la informacion de las sesiones
+	 */
 	public String infoSesionesPelicula(Pelicula pelicula){
 		String text = "Sesiones en el cine " + nombre + ", " + direccion + 
-				", de la película " + pelicula.getTitulo() + "\n";
+				", de la pel�cula " + pelicula.getTitulo() + "\n";
 		for(Sala sala : this.salas){
 			for(Sesion sesion : sala.getSesiones()){
 				if(pelicula.equals(sesion.getPelicula())){

@@ -15,7 +15,7 @@ public class Sala{
 	private List<Sesion> sesiones;
 
 	/** 
-	 * Constructor sin sesiones, las sesiones se añaden posteriormente.
+	 * Constructor sin sesiones, las sesiones se anaden posteriormente.
    	 * @param id Numero de identificacion de la sala.
    	 * @param butacas Numero de butacas en la sala.
    	 */
@@ -59,9 +59,9 @@ public class Sala{
 	}
 
 	/** 
-	 * Añade una sesión a la lista de sesiones de la sala.
-   	 * @param sesion Sesion que se quiere añadir a la lita de sesiones de la sala.
-   	 * @return Boolean que indica si se ha podido o no añadir la sesión a la lista comprobando las fechas.
+	 * A�ade una sesion a la lista de sesiones de la sala.
+   	 * @param sesion Sesion que se quiere a�adir a la lita de sesiones de la sala.
+   	 * @return Boolean que indica si se ha podido o no añadir la sesi�n a la lista comprobando las fechas.
    	 */
 	public boolean anadirSesion(Sesion sesion){
 		for(Sesion ses : this.sesiones){
@@ -76,7 +76,10 @@ public class Sala{
    	 * @return Un string con todos los datos de la pelicula.
    	 */
 	public String toString(){
-		return String.valueOf(id);
+		if(this.validar()==true) {
+			return String.valueOf(id);
+		}
+		return "\tSala no v�lida.";
 	}
 	
 	/**
