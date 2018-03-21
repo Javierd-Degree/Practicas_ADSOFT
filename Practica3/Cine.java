@@ -212,7 +212,10 @@ public class Cine{
 	 * @return String con la informacion del cine
 	 */
 	public String toString() {
-		return "Cine " + nombre + " en la dirección " + direccion + "\n";
+		if(this.validar() == true) {
+			return "Cine " + nombre + " en la dirección " + direccion + "\n";
+		}
+		return "\tEl cine no es válido.";
 	}
 	
 	/**
