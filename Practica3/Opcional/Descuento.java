@@ -8,7 +8,7 @@ public enum Descuento{
 	DIA_ESPECTADOR("Día del espectador", 0.2), ESTUDIANTE("Estudiante", 0.3),
 	TERCERA_EDAD("Tercera edad", 0.40), FIESTA("Día festivo", 0.1);
 
-	Descuento(String n, double v){
+	private Descuento(String n, double v){
 		nombre = n;
 		valor = v;
 	}

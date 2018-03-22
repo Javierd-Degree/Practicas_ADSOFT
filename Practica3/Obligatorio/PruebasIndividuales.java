@@ -23,7 +23,7 @@ public class PruebasIndividuales{
 	 * y otra no valida (numero de butacas reservadas negativo), y las validamos.
 	 * Anadimos dichas sesiones a la sala, para ver que al tener la misma fecha
 	 * no se pueden anadir ambas. Esto prueba el metodo anadirSesion de sala, pues
-	 * no se puede probar sin usar Sala.
+	 * no se puede probar sin usar Sesion.
 	 * Imprimimos la sesion valida.
    	 * @param args Array de strings que el usuario pasa por teclado (se ignora)
    	 */

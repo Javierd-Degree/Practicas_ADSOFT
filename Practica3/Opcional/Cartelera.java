@@ -21,7 +21,7 @@ public class Cartelera {
 	/**
 	* Metodo que permite anadir una pelicula a la cartelera, tras comprobar
 	* que no esta introducida.
-	* @param pelicula Pelicula que se va a anadir
+	* @param p Pelicula que se va a anadir
 	* @return boolean false si se ha anadido previamente, true si no.
 	*/
 	public boolean anadirPelicula(Pelicula p) {
@@ -36,7 +36,7 @@ public class Cartelera {
 	/**
 	* Metodo que permite quitar una pelicula a la cartelera, tras comprobar
 	* que esta introducida.
-	* @param pelicula Pelicula que se va a quitar.
+	* @param p Pelicula que se va a quitar.
 	* @return boolean false no estaba anadida, true si se elimina correctamente.
 	*/
 	public boolean quitarPelicula(Pelicula p) {

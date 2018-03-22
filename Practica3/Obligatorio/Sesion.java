@@ -18,7 +18,7 @@ public class Sesion{
 	* @param fecha Fecha de la sesion.
 	* @param pelicula Pelicula que se va a reproducir en la sesion
 	* @param sala Sala en la que tiene lugar la sesion
-	* @param butacas Numero de butacas butacasReservadas
+	* @param butacasReservadas Numero de butacas butacasReservadas
 	*/
 	public Sesion(LocalDate fecha, Pelicula pelicula, Sala sala, int butacasReservadas){
 		this.fecha = fecha;
@@ -34,7 +34,7 @@ public class Sesion{
 	* No comprobamos si sala es null porque puede haber una sesion que establezca
 	* la sala posteriormente.
 	* No validamos la pelicula o la sala, solo comprobamos que existan.
-	* @retun boolean indicando si es o no valido.
+	* @return boolean indicando si es o no valido.
 	*/
 	public boolean validar(){
 		if(this.butacasReservadas < 0){

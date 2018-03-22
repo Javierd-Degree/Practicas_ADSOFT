@@ -32,7 +32,7 @@ public class Pelicula{
 	/**
 	* Valida si los datos de la pelicula son o no correctos. 
 	* Comprobamos que el anno sea un numero positivo al menos y que los Strings no sean vacios.
-	* @retun boolean indicando si es o no valido.
+	* @return boolean indicando si es o no valido.
 	*/
 	public boolean validar(){
 		if(this.anno < 0){
