@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 
 public class Cartelera {
+	/**
+	* peliculas: Lista de peliculas de la cartelera.
+	*/
 	private List<Pelicula> peliculas;
 	
 	/**

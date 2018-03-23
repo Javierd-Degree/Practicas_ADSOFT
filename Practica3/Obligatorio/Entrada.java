@@ -6,6 +6,9 @@
 
 
 public class Entrada{
+	/**
+	* precio: Precio de la entrada.
+	*/
 	private double precio;
 	
 	/**

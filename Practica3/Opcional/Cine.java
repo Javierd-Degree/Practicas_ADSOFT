@@ -11,10 +11,25 @@ import java.time.LocalDate;
 */
 
 public class Cine{
+	/**
+	* nombre: Nombre del cine.
+	*/
 	private String nombre;
+	/**
+	* direccion: Direccion del cine.
+	*/
 	private String direccion;
+	/**
+	* cartelera: Cartelera del cine.
+	*/
 	private Cartelera cartelera;
+	/**
+	* salas: Lista de salas del cine.
+	*/
 	private List<Sala> salas;
+	/**
+	* entradas: Lista de entradas vendidas en el cine.
+	*/
 	private List<Entrada> entradas;
 
 	/** 

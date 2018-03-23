@@ -7,10 +7,21 @@ import java.time.LocalDate;
 */
 
 public class Sesion{
-
+	/**
+	* fecha: Fecha en la que se emitira la sesion.
+	*/
 	LocalDate fecha;
+	/**
+	* pelicula: Pelicula que se emitira en la sesion.
+	*/
 	Pelicula pelicula;
+	/**
+	* sala: Sala en la que se emitira la sesion.
+	*/
 	Sala sala;
+	/**
+	* butacasReservadas: Numero de butacas ya reservadas para la sesion.
+	*/
 	int butacasReservadas;
 
 	/**

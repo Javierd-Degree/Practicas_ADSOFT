@@ -7,10 +7,25 @@
 */
 
 public class Pelicula{
+	/**
+	* titulo: Titulo de la pelicula.
+	*/
 	private String titulo;
+	/**
+	* director: Director de la pelicula.
+	*/
 	private String director;
+	/**
+	* anno: Anno de estreno de la pelicula.
+	*/
 	private int anno;
+	/**
+	* sinopsis: Resumen de la pelicula.
+	*/
 	private String sinopsis;
+	/**
+	* genero: Genero de la pelicula.
+	*/
 	private Genero genero;
 
 	/** 

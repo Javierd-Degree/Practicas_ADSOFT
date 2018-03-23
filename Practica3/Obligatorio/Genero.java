@@ -11,7 +11,9 @@ public enum Genero{
 	EPOCA("Epoca"), ACCION("Accion"), DIBUJOS("Dibujos animados");
 
 	Genero(String n){nombre = n;}
-
+	/**
+	* nombre: Nombre del genero.
+	*/
 	private final String nombre;
 	
 	/**

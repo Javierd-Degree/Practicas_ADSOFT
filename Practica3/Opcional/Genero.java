@@ -12,6 +12,9 @@ public enum Genero{
 
 	Genero(String n){nombre = n;}
 
+	/**
+	* nombre: Nombre del genero.
+	*/
 	private final String nombre;
 	
 	/**

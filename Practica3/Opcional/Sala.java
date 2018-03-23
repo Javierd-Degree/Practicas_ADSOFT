@@ -10,8 +10,17 @@ import java.util.ArrayList;
 */
 
 public class Sala{
+	/**
+	* id: Numero de identificacion de la sala.
+	*/
 	private int id;
+	/**
+	* butacas: Numero total de butacas de la sala.
+	*/
 	private int butacas;
+	/**
+	* sesiones: Lista de sesiones que se emitiran en la sala.
+	*/
 	private List<Sesion> sesiones;
 
 	/** 
