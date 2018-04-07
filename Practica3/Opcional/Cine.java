@@ -11,10 +11,25 @@ import java.time.LocalDate;
 */
 
 public class Cine{
+	/**
+	* nombre: Nombre del cine.
+	*/
 	private String nombre;
+	/**
+	* direccion: Direccion del cine.
+	*/
 	private String direccion;
+	/**
+	* cartelera: Cartelera del cine.
+	*/
 	private Cartelera cartelera;
+	/**
+	* salas: Lista de salas del cine.
+	*/
 	private List<Sala> salas;
+	/**
+	* entradas: Lista de entradas vendidas en el cine.
+	*/
 	private List<Entrada> entradas;
 
 	/** 
@@ -33,7 +48,7 @@ public class Cine{
 	/**
 	* Valida si los datos del cine son o no correctos. 
 	* Comprobamos que los String de nombre y dirección no estén vacíos.
-	* @retun boolean indicando si es o no valido.
+	* @return boolean indicando si es o no valido.
 	*/
 	public boolean validar(){
 		if(this.nombre == "" || this.direccion == ""){
@@ -104,55 +119,55 @@ public class Cine{
 	
 	/**
 	 * Metodo que crea una entrada normal que se va a vender, la anade al array de entradas del
-	 * cine y devuelve el precio de la entrada.
+	 * cine y devuelve un string con la informacion de la sesion y el precio de la entrada.
 	 * @param precio Precio de la entrada.
 	 * @param sesion Sesion a la que corresponde la entrada.
-	 * @return Precio de la entrada vendida.
+	 * @return String con la informacion de la sesion y el precio de la entrada vendida.
 	 */
-	public double venderEntradas(double precio, Sesion sesion){
+	public String venderEntradas(double precio, Sesion sesion){
 		Entrada e;
 		e = new Entrada(precio);
 		
 		if(sesion.actualizarButacasVendidas(1)==true){
 			this.entradas.add(e);
-			return e.getPrecio();
+			return "Entradas para: " + sesion + " Precio: " + e.getPrecio();
 		}
 		
-		return -1;
+		return "Error en la venta.";
 	}
 	
 	/**
 	 * Metodo que crea una entrada con descuento que se va a vender, la anade al array de entradas del
-	 * cine y devuelve el precio de la entrada.
+	 * cine y devuelve un string con la informacion de la sesion y el precio de la entrada.
 	 * @param precio Precio de la entrada.
 	 * @param descuento Descuento que se aplica a la venta de la entrada.
 	 * @param sesion Sesion a la que corresponde la entrada.
-	 * @return Precio de la entrada vendida.
+	 * @return String con la informacion de la sesion y el precio de la entrada vendida.
 	 */
-	public double venderEntradas(double precio, Descuento descuento, Sesion sesion){
+	public String venderEntradas(double precio, Descuento descuento, Sesion sesion){
 		Entrada e;
 		
 		e = new EntradaDescuento(precio, descuento);
 		
 		if(sesion.actualizarButacasVendidas(1)==true){
 			this.entradas.add(e);
-			return e.getPrecio();
+			return "Entradas " + descuento + " para: " + sesion + " Precio: " + e.getPrecio();
 		}
 		
-		return -1;
+		return "Error en la venta.";
 	}
 	
 	/**
 	 * Metodo que crea varias entradas normales que se van a vender y las añade al array de entradas del
-	 * cine y devuelve el precio total de estas.
+	 * cine y devuelve un string con la informacion de la sesion y el precio total de estas.
 	 * @param numero Numero de entradas que se van a vender
 	 * @param precio Precio de cada una de las entradas
 	 * @param sesion Sesion a la que corresponden las entradas
-	 * @return Precio que se debe pagar por las entradas
+	 * @return String con la informacion de la sesion y el precio que se debe pagar por las entradas
 	 */
-	public double venderEntradas(int numero, double precio, Sesion sesion){
+	public String venderEntradas(int numero, double precio, Sesion sesion){
 		if(sesion.actualizarButacasVendidas(numero) == false) {
-			return -1;
+			return "Error en la venta.";
 		}
 		
 		double total = 0;
@@ -161,25 +176,25 @@ public class Cine{
 			
 			total += e.getPrecio();
 			if (this.entradas.add(e) == false) {
-				return -1;
+				return "Error en la venta.";
 			}
 		}
 		
-		return (double) Math.round(total * 100) / 100;
+		return "Entradas para: " + sesion + " Precio: " + (double) Math.round(total * 100) / 100;
 	}
 	
 	/**
 	 * Metodo que crea varias entradas con descuento que se van a vender y las
-	 * añade al array de entradas del cine y devuelve el precio total de estas.
+	 * añade al array de entradas del cine y devuelve un string con la informacion de la sesion y el precio total de estas.
 	 * @param numero Numero de entradas que se van a vender
 	 * @param precio Precio de cada una de las entradas
 	 * @param descuento Descuento que se aplica a la venta de las entradas
 	 * @param sesion Sesion a la que corresponden las entradas
-	 * @return Precio que se debe pagar por las entradas
+	 * @return String con la informacion de la sesion y el precio que se debe pagar por las entradas
 	 */
-	public double venderEntradas(int numero, double precio, Descuento descuento, Sesion sesion){
+	public String venderEntradas(int numero, double precio, Descuento descuento, Sesion sesion){
 		if(sesion.actualizarButacasVendidas(numero) == false) {
-			return -1;
+			return "Error en la venta.";
 		}
 		
 		double total = 0;
@@ -188,11 +203,11 @@ public class Cine{
 			
 			total += e.getPrecio();
 			if (this.entradas.add(e) == false) {
-				return -1;
+				return "Error en la venta.";
 			}
 		}
 		
-		return (double) Math.round(total * 100) / 100;
+		return "Entradas " + descuento + " para: " + sesion + " Precio: " + (double) Math.round(total * 100) / 100;
 	}
 
 	/**

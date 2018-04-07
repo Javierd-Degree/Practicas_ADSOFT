@@ -5,6 +5,9 @@
 */
 
 public class EntradaDescuento extends Entrada{
+	/**
+	* descuento: Descuento de la entrada.
+	*/
 	private Descuento descuento;
 
 	/**

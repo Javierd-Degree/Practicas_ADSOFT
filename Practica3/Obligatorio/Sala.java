@@ -10,8 +10,17 @@ import java.util.ArrayList;
 */
 
 public class Sala{
+	/**
+	* id: Numero de identificacion de la sala.
+	*/
 	private int id;
+	/**
+	* butacas: Numero de butacas totales en la sala.
+	*/
 	private int butacas;
+	/**
+	* sesiones: Lista de sesiones que se emitiran en la sala.
+	*/
 	private List<Sesion> sesiones;
 
 	/** 
@@ -28,7 +37,7 @@ public class Sala{
 	/**
 	* Valida si los datos de la sala son o no correctos. 
 	* Comprobamos que la sala tenga un numero de butacas positivo.
-	* @retun boolean indicando si es o no valido.
+	* @return boolean indicando si es o no valido.
 	*/
 	public boolean validar(){
 		return butacas >= 0;

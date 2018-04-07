@@ -12,8 +12,13 @@ public enum Descuento{
 		nombre = n;
 		valor = v;
 	}
-
+	/**
+	* nombre: Nombre del descuento.
+	*/
 	private final String nombre;
+	/**
+	* valor: Valor del descuento.
+	*/
 	private final double valor;
 	
 	/**

@@ -5,6 +5,9 @@
 */
 
 public class EntradaDiaEspectador extends Entrada{
+	/**
+	* descuento: Descuento que tiene la entrada.
+	*/
 	private double descuento;
 
 	/**
