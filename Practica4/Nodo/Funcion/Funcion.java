@@ -1,4 +1,7 @@
-package Nodo;
+package Nodo.Funcion;
+
+import Nodo.INodo;
+import Nodo.Nodo;
 
 public class Funcion extends Nodo{
 	private int nDescendientes;
@@ -20,8 +23,11 @@ public class Funcion extends Nodo{
 	
 	@Override
 	public double calcular() {
-		/*TODO: Que devolvemos¿?*/
-		return 0.0;
+		double result = 0.0;
+		for(INodo descendiente: this.descendientes) {
+			result += descendiente.calcular();
+		}
+		return result;
 	}
 	
 	@Override

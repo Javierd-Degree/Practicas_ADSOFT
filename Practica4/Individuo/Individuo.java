@@ -2,21 +2,17 @@ package Individuo;
 
 import java.util.List;
 
-import Nodo.Funcion;
+import Nodo.Funcion.Funcion;
 import Nodo.INodo;
 import Nodo.Terminal;
 
 public class Individuo implements IIndividuo{
 	private INodo expresion;
-	
-	
-	public Individuo(INodo expresion) {
-		this.expresion = expresion;
-	}
+	public double fitness;
 	
 	@Override
 	public INodo getExpresion() {
-		return expresion;
+		return this.expresion;
 	}
 
 	@Override
@@ -27,13 +23,12 @@ public class Individuo implements IIndividuo{
 
 	@Override
 	public double getFitness() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.fitness;
 	}
 
 	@Override
 	public void setFitness(double fitness) {
-		// TODO Auto-generated method stub
+		this.fitness = fitness;
 		
 	}
 
@@ -50,13 +45,15 @@ public class Individuo implements IIndividuo{
 
 	@Override
 	public int getNumeroNodos() {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		
+		// TODO ¿Como contarlos?
+		return result;
 	}
 
 	@Override
 	public void writeIndividuo() {
-		System.out.println(expresion.getRaiz());
+		System.out.println(expresion);
 	}
 
 }

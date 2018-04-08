@@ -2,7 +2,8 @@ package Individuo;
 
 import Nodo.INodo;
 import Nodo.Terminal;
-import Nodo.Funcion;
+import Nodo.Funcion.Funcion;
+
 import java.util.List;
 
 public interface IIndividuo {
