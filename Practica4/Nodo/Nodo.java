@@ -34,4 +34,18 @@ public abstract class Nodo implements INodo{
 	public String toString() {
 		return ""+simbolo+" ";
 	}
+	
+	/**
+	 * Metodo que, dado un INodo, cuenta de forma recursiva el numero total 
+	 * de nodos que hay, incluyendose a si mismo.
+	 * 
+	 * @return numero de nodos que hay.
+	 * */
+	public int numNodos() {
+		int total = 1;
+		for(INodo hijo: descendientes) {
+			total += hijo.numNodos();
+		}
+		return total;
+	}
 }

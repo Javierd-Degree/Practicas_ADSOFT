@@ -3,13 +3,12 @@ package Dominio;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import Excepciones.ArgsDistintosFuncionesException;
 import Individuo.IIndividuo;
@@ -40,7 +39,7 @@ public class DominioAritmetico implements IDominio{
 	
 	public void definirValoresPrueba(String ficheroDatos) throws FileNotFoundException, IOException{
 		BufferedReader reader = new BufferedReader(new InputStreamReader( new FileInputStream(ficheroDatos)));
-		valores = new HashMap<>();
+		valores = new TreeMap<>();
 		String line;
 		while((line = reader.readLine()) != null) {
 			String value[] = line.split("\t");
@@ -53,13 +52,15 @@ public class DominioAritmetico implements IDominio{
 		double fitness = 0;
 		/*Recorremos la lista de valores y los vamos calculando*/
 		for(Map.Entry<Double, Double> entry: this.valores.entrySet()) {
-			/*TODO Calculamos el valor, que no se como se hace*/
-			double resultado = -9999999.1;
-			System.out.printf("Valor %.1f <-> Rdo estimado: %.1f <-> Rdo real: %.1f", entry.getKey(), entry.getValue(), resultado);
+			Terminal.setValor(entry.getKey());
+			double resultado = individuo.calcularExpresion();
+			System.out.printf("Valor %.1f <-> Rdo estimado: %.1f <-> Rdo real: %.1f\n", entry.getKey(), resultado, entry.getValue());
 			if(Math.abs(resultado-entry.getValue()) <= 1) {
 				fitness ++;
 			}
 		}
+		/*Aunque no se indica en el enunciado, actualizamos el individuo.*/
+		individuo.setFitness(fitness);
 		return fitness;
 	}
 }

@@ -1,16 +1,28 @@
 package Nodo.Funcion;
 
+import Nodo.INodo;
+
 public class FuncionResta extends Funcion{
 	
-	public FuncionResta() {
-		super("-", 2);
+	public FuncionResta(int nDescendientes) {
+		super("-", nDescendientes);
+	}
+	
+	@Override
+	public INodo copy() {
+		INodo copia = new FuncionResta(this.nDescendientes);
+		super.copiarDescendientes();
+		
+		return copia;
 	}
 	
 	@Override
 	public double calcular() {
-		double a = Double.parseDouble(this.getDescendientes().get(0).getRaiz());
-		double b = Double.parseDouble(this.getDescendientes().get(1).getRaiz());
-		return a-b;
+		double a = this.getDescendientes().get(0).calcular();
+		for(int i = 1; i < this.getDescendientes().size(); i++) {
+			a -= this.getDescendientes().get(i).calcular(); 
+		}
+		return a;
 	}
 
 }

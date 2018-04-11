@@ -45,10 +45,10 @@ public class Individuo implements IIndividuo{
 
 	@Override
 	public int getNumeroNodos() {
-		int result = 0;
-		
-		// TODO ¿Como contarlos?
-		return result;
+		if(expresion == null) {
+			return 0;
+		}
+		return expresion.numNodos();
 	}
 
 	@Override

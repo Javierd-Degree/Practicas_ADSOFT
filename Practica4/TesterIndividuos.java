@@ -8,9 +8,9 @@ public class TesterIndividuos {
 
 	public static void main(String[] args) {
 			Terminal x = new TerminalAritmetico("x");
-			Funcion suma = new FuncionSuma();
-			Funcion resta = new FuncionResta();
-			Funcion multi = new FuncionMultiplicacion();
+			Funcion suma = new FuncionSuma(2);
+			Funcion resta = new FuncionResta(2);
+			Funcion multi = new FuncionMultiplicacion(2);
 			multi.incluirDescendiente(x);
 			multi.incluirDescendiente(x);
 			suma.incluirDescendiente(multi);
