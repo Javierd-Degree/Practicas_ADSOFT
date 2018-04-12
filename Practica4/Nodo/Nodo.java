@@ -20,10 +20,16 @@ public abstract class Nodo implements INodo{
 	 * Usando un objeto como símbolo conseguimos que sea lo
 	 * mas generico posible.*/
 	protected Object simbolo;
+	
 	/**
 	 * @param descendientes Lista de descencientes del Nodo.
 	 */
 	protected List<INodo> descendientes;
+	
+	/**
+	 * @param etiqueta Etiqueta del nodo.
+	 */
+	private int etiqueta = -1;
 	
 	/**
 	 * Constructor por defecto de la clase Nodo.
@@ -89,5 +95,36 @@ public abstract class Nodo implements INodo{
 			total += hijo.numNodos();
 		}
 		return total;
+	}
+	
+	/**
+	 * Metodo que permite etiquetar a un Nodo y todos sus descendientes, con
+	 * enteros del cero al numero total de nodos menos 1.
+	 */
+	public void etiquetaNodo() {
+		etiquetar(0);
+	}
+	
+	/**
+	 * Metodo recursivo usado por etiquetarNodo que nos permite etiquetar
+	 * todos los descendentes de un nodo sin repeticiones.
+	 */
+	public int etiquetar(int etiqueta) {
+		this.etiqueta = etiqueta;
+		int e = etiqueta;
+		for(INodo hijo: descendientes) {
+			e = hijo.etiquetar(e+1);
+		}
+		return e;
+	}
+	
+	/**
+	 * Getter de la etiqueta del nodo. Si no ha sido inicializada
+	 * devuelve -1.
+	 * 
+	 * @return etiqueta del nodo o -1.
+	 */
+	public int getEtiqueta() {
+		return this.etiqueta;
 	}
 }

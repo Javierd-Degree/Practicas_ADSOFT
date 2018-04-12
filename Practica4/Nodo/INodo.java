@@ -55,4 +55,13 @@ public interface INodo {
 	 * @return numero de nodos de un INodo, incluyendose a si mismo.
 	 * */
 	public int numNodos();
+	
+	/**
+	 * Metodo anadido por nosotros que permite etiquetar INodos de 
+	 * forma recursiva.
+	 * 
+	 * @param etiqueta etiqueta a asignar a dicho nodo.
+	 * @return siguiente etiqueta que estaria disponible.
+	 */
+	public int etiquetar(int etiqueta);
 }
