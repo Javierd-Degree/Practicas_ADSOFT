@@ -1,13 +1,15 @@
 package Excepciones;
 
 /**
-* Excepcion usada para TODO
+* Excepcion usada para evitar que se eligan los dos nodos
+* iniciales como nodos de un cruce.
 * 
 * @author Estuiante EPS Javier.delgadod@estudiante.uam.es
 * @author Estuiante EPS Javier.lopezcano@estudiante.uam.es
 */
 
-public class ArgsDistintosFuncionesException extends Exception{
+
+public class CruceNuloException extends Exception{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -17,7 +19,8 @@ public class ArgsDistintosFuncionesException extends Exception{
 	 */
 	@Override
 	public String toString() {
-		return "Error de argumentos que aun no se que hace.";
+		return "No se pueden cruzar los nodos iniciales "
+				+ "de ambas funciones";
 	}
 
 }

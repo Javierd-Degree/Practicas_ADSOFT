@@ -70,4 +70,11 @@ public interface IIndividuo {
 	 * Metodo que imprime por pantalla la expresion del IIndividuo.
 	 */
 	public void writeIndividuo();
+	
+	/**
+	 * Metodo anadido por nosotros que permite etiquetar el nodo raiz Nodo y
+	 *  todos sus descendientes, con enteros del cero al numero total de nodos
+	 *  menos 1.
+	 */
+	public void etiquetaNodos();
 }

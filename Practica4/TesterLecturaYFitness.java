@@ -1,7 +1,9 @@
 import java.io.IOException;
+import java.util.List;
 
 import Dominio.DominioAritmetico;
 import Dominio.IDominio;
+import Excepciones.CruceNuloException;
 import Individuo.IIndividuo;
 import Individuo.Individuo;
 import Nodo.Terminal;
@@ -38,5 +40,19 @@ public class TesterLecturaYFitness {
 		System.out.println();
 		fitness = domAritm.calcularFitness(indiv);
 		System.out.println("\nFITNESS= "+fitness);
+		
+		
+		
+		PruebaCruce prueba = new PruebaCruce();
+		IIndividuo indiv2 = new Individuo();
+		indiv2.setExpresion(suma);
+		List<IIndividuo> lista;
+		try {
+			lista = prueba.cruce(indiv, indiv2);
+			lista.get(0).writeIndividuo();
+			lista.get(1).writeIndividuo();
+		} catch (CruceNuloException e) {
+			e.printStackTrace();
+		}
 	}
 }

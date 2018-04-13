@@ -57,6 +57,12 @@ public interface INodo {
 	public int numNodos();
 	
 	/**
+	 * Metodo anadido por nosotros que permite etiquetar a un Nodo y todos sus 
+	 * descendientes, con enteros del cero al numero total de nodos menos 1.
+	 */
+	public void etiquetaNodos();
+	
+	/**
 	 * Metodo anadido por nosotros que permite etiquetar INodos de 
 	 * forma recursiva.
 	 * 
@@ -64,4 +70,19 @@ public interface INodo {
 	 * @return siguiente etiqueta que estaria disponible.
 	 */
 	public int etiquetar(int etiqueta);
+	
+	
+	/**
+	 * Metodo anadido por nosotros que permite encontrar
+	 * un Nodo dentro de los descendientes de otro, de 
+	 * forma recursiva, usando su etiqueta.
+	 * 
+	 * @param etiqueta etiqueta del nodo que estamos buscando.
+	 * @return INodo buscado, o null si no se encuentra.
+	 */
+	public INodo buscarNodo(int etiqueta);
+	
+	
+	/*TODO*/
+	public boolean reemplazarNodo(int etiqueta, INodo sustituto);
 }

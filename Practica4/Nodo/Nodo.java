@@ -29,7 +29,7 @@ public abstract class Nodo implements INodo{
 	/**
 	 * @param etiqueta Etiqueta del nodo.
 	 */
-	private int etiqueta = -1;
+	protected int etiqueta = -1;
 	
 	/**
 	 * Constructor por defecto de la clase Nodo.
@@ -101,17 +101,21 @@ public abstract class Nodo implements INodo{
 	 * Metodo que permite etiquetar a un Nodo y todos sus descendientes, con
 	 * enteros del cero al numero total de nodos menos 1.
 	 */
-	public void etiquetaNodo() {
+	public void etiquetaNodos() {
 		etiquetar(0);
 	}
 	
 	/**
 	 * Metodo recursivo usado por etiquetarNodo que nos permite etiquetar
 	 * todos los descendentes de un nodo sin repeticiones.
+	 * 
+	 * @param etiqueta etiqueta a asignar a dicho nodo.
+	 * @return siguiente etiqueta que estaria disponible.
 	 */
 	public int etiquetar(int etiqueta) {
 		this.etiqueta = etiqueta;
 		int e = etiqueta;
+		System.out.println(e + " "+this);
 		for(INodo hijo: descendientes) {
 			e = hijo.etiquetar(e+1);
 		}
@@ -127,4 +131,44 @@ public abstract class Nodo implements INodo{
 	public int getEtiqueta() {
 		return this.etiqueta;
 	}
+	
+	
+	/**
+	 * Metodo que permite encontrar un Nodo dentro de los
+	 * descendientes de otro, de forma recursiva, usando su 
+	 * etiqueta.
+	 * 
+	 * @param etiqueta etiqueta del nodo que estamos buscando.
+	 * @return INodo buscado, o null si no se encuentra.
+	 */
+	public INodo buscarNodo(int etiqueta) {
+		if(etiqueta == this.etiqueta) {
+			return this;
+		}
+		
+		INodo e;
+		for(INodo hijo: descendientes) {
+			if((e = hijo.buscarNodo(etiqueta)) != null) {
+				return e;
+			}
+		}
+		return null;
+	}
+	
+	public boolean reemplazarNodo(int etiqueta, INodo sustituto) {
+		if(etiqueta == this.etiqueta) {
+			return true;
+		}
+		
+		for(INodo hijo: descendientes) {
+			/* Si lo encontramos, lo reemplazamos y listo.*/
+			if(hijo.reemplazarNodo(etiqueta, sustituto) == true) {
+				hijo = sustituto;
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 }

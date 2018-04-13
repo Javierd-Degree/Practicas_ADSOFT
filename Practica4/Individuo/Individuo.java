@@ -114,5 +114,13 @@ public class Individuo implements IIndividuo{
 	public void writeIndividuo() {
 		System.out.println(expresion);
 	}
+	
+	/**
+	 * Metodo que permite etiquetar el nodo raiz Nodo y todos sus descendientes, con
+	 * enteros del cero al numero total de nodos menos 1.
+	 */
+	public void etiquetaNodos() {
+		this.expresion.etiquetaNodos();
+	}
 
 }
