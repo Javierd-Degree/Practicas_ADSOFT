@@ -16,28 +16,17 @@ import Nodo.INodo;
 
 public class PruebaCruce {
 	
-	/**
-	 * Metodo privado que nos permite generar un numero aleatorio en un intervalo
-	 * cerrado [min, max]
-	 * 
-	 * @param min Numero aleatorio minimo.
-	 * @param max Numero aleatorio maximo.
-	 * @return int con un numero aleatorio entre min y max, ambos incluidos.
-	 */
-	private static int aleatNum(int min, int max) {
-		return min + (int)(Math.random() * (max-min+1));
-	}
-	
 	public List<IIndividuo> cruce(IIndividuo ind1, IIndividuo ind2) throws CruceNuloException{
 		List<IIndividuo> result = new ArrayList<>();
-		int a = aleatNum(0, ind1.getNumeroNodos());
-		int b = aleatNum(0, ind2.getNumeroNodos());
+		int a = Individuo.aleatNum(0, ind1.getNumeroNodos()-1);
+		int b = Individuo.aleatNum(0, ind2.getNumeroNodos()-1);
 		
 		if(a == 0 && b == 0) {
 			throw new CruceNuloException();
 		}
 		
-		System.out.println("Buscamos los nodos " + a + ", "+ b);
+		System.out.println("Punto de cruce del progenitor 1: "+a);
+		System.out.println("Punto de cruce del progenitor 2: "+b);
 		
 		/*Copiamos los individuos, pues no podemos devolver el mismo.
 		 * Una vez copiados, los etiquetamos, pues durante la copia no
@@ -62,13 +51,15 @@ public class PruebaCruce {
 		
 		INodo nodo1 = copia1.getExpresion().buscarNodo(a);
 		INodo nodo2 = copia2.getExpresion().buscarNodo(b);
-		System.out.println("Nodo con etiqueta "+a + ": "+copia1.getExpresion().buscarNodo(a));
-		System.out.println("Nodo con etiqueta "+b + ": "+copia2.getExpresion().buscarNodo(b));
 		
 		result.add(copia1);
 		result.add(copia2);
 		copia1.getExpresion().reemplazarNodo(a, nodo2);
 		copia2.getExpresion().reemplazarNodo(b, nodo1);
+		
+		/*TODO Reetiquetar los nodos despues del cruce. No lo hacemos porque
+		 * ahora mismo el etiquetar imprime, y seria muy molesto.*/
+		
 		return result;
 	}
 

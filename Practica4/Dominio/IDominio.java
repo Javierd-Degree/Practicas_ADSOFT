@@ -54,7 +54,23 @@ public interface IDominio {
 	 * mediante definirValoresPrueba. 
 	 * 
 	 * @param individuo IIndividuo cuyo nivel de fitness queremos calcular.
-	 * @return double con el valor de fitness del individuo.
+	 * @return double con el valor de fitness del individuo, que oscila entre 0
+	 * y el numero de puntos del archivo usado en definirValoresPrueba.
+	 * Cuando mayor sea, mejor es el individuo.
 	 */
 	public double calcularFitness(IIndividuo individuo);
+	
+	/**
+	 * Funcion fitness ideada por nosotros.
+	 * Dado un individuo, calcula su nivel de fitness usando los valores cargados
+	 * mediante definirValoresPrueba. 
+	 * Evalua el IIndividuo en los puntos dados y devuelve la media de la distancia
+	 * entre la evaluacion del IIndividuo y la funcion pedida. De esta forma,
+	 * permite analizar con mayor precision la validez del IIndividuo.
+	 * 
+	 * @param individuo IIndividuo cuyo nivel de fitness queremos calcular.
+	 * @return double con el valor de fitness del individuo, que oscila entre
+	 * cero e infinito. Cuanto menor sea, menor es la funcion.
+	 */
+	public double calcularFitnessAvanzado(IIndividuo individuo);
 }

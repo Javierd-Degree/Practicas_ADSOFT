@@ -1,9 +1,7 @@
 import java.io.IOException;
-import java.util.List;
 
 import Dominio.DominioAritmetico;
 import Dominio.IDominio;
-import Excepciones.CruceNuloException;
 import Individuo.IIndividuo;
 import Individuo.Individuo;
 import Nodo.Terminal;
@@ -39,20 +37,41 @@ public class TesterLecturaYFitness {
 		indiv.writeIndividuo();
 		System.out.println();
 		fitness = domAritm.calcularFitness(indiv);
-		System.out.println("\nFITNESS= "+fitness);
+		/*TODO Explicar porque no se imprimen los valores.
+		 *(Lo hemos quitado para no saturar el algoritmo general*/
+		System.out.println("\nFITNESS = "+fitness);
 		
 		
+		/* Individuo de verdad. */
+		IDominio domAritm2 = new DominioAritmetico();
+		domAritm2.definirValoresPrueba("datos.txt");
+		Terminal x2 = new TerminalAritmetico("x");
+		Funcion suma2 = new FuncionSuma(2);
+		Funcion suma3 = new FuncionSuma(2);
+		Funcion multi2 = new FuncionMultiplicacion(2);
+		Funcion multi3 = new FuncionMultiplicacion(2);
 		
-		PruebaCruce prueba = new PruebaCruce();
+		multi2.incluirDescendiente(x2);
+		multi2.incluirDescendiente(x2);
+		suma2.incluirDescendiente(x);
+		suma2.incluirDescendiente(multi2);
+		
+		multi3.incluirDescendiente(multi2);
+		multi3.incluirDescendiente(suma2);
+		
+		suma3.incluirDescendiente(multi3);
+		suma3.incluirDescendiente(suma2);
+		
 		IIndividuo indiv2 = new Individuo();
-		indiv2.setExpresion(suma);
-		List<IIndividuo> lista;
-		try {
-			lista = prueba.cruce(indiv, indiv2);
-			lista.get(0).writeIndividuo();
-			lista.get(1).writeIndividuo();
-		} catch (CruceNuloException e) {
-			e.printStackTrace();
-		}
+		indiv2.setExpresion(suma3);
+		System.out.println();
+		System.out.println("INDIVIDUO");
+		indiv2.writeIndividuo();
+		System.out.println();
+		fitness = domAritm2.calcularFitness(indiv2);
+		/*TODO Explicar porque no se imprimen los valores.
+		 *(Lo hemos quitado para no saturar el algoritmo general*/
+		System.out.println("\nFITNESS = "+fitness);
+		
 	}
 }

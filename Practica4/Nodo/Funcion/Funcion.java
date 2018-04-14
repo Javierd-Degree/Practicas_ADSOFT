@@ -30,6 +30,14 @@ public abstract class Funcion extends Nodo{
 	}
 	
 	/**
+	 * Getter del numero de descendientes de una funcion.
+	 * @return numero de descencientes que tiene la funcion.
+	 */
+	public int getNumDescendientes() {
+		return this.nDescendientes;
+	}
+	
+	/**
 	 * Metodo que permite anadir un descendiente mas a la Funcion.
 	 * 
 	 * @param nodo Operando a anadir.

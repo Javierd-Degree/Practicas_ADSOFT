@@ -115,7 +115,7 @@ public abstract class Nodo implements INodo{
 	public int etiquetar(int etiqueta) {
 		this.etiqueta = etiqueta;
 		int e = etiqueta;
-		System.out.println(e + " "+this);
+		//System.out.println(e + " "+this);
 		for(INodo hijo: descendientes) {
 			e = hijo.etiquetar(e+1);
 		}
@@ -155,17 +155,35 @@ public abstract class Nodo implements INodo{
 		return null;
 	}
 	
+	/**
+	 * Metodo recursivo que permite reemplazar el INodo cuya etiqueta se pasa
+	 * como parametro, por el INodo pasado.
+	 * 
+	 * @param etiqueta int con la etiqueta del nodo a reemplazar.
+	 * @param sustituto INodo que queremos poner en la posicion
+	 * del anterior.
+	 * @return parametro usado por la recursion que se puede ignorar.
+	 */
 	public boolean reemplazarNodo(int etiqueta, INodo sustituto) {
 		if(etiqueta == this.etiqueta) {
 			return true;
 		}
 		
-		for(INodo hijo: descendientes) {
+		INodo hijo;
+		int posicion = -1;
+		for(int i = 0; i < descendientes.size(); i++) {
+			hijo = descendientes.get(i);
 			/* Si lo encontramos, lo reemplazamos y listo.*/
 			if(hijo.reemplazarNodo(etiqueta, sustituto) == true) {
-				hijo = sustituto;
-				return true;
+				//System.out.println("Hijo encontrado: "+ hijo);
+				posicion = i;
+				break;
 			}
+		}
+		
+		if(posicion != -1) {
+			descendientes.remove(descendientes.get(posicion));
+			descendientes.add(posicion, sustituto);
 		}
 		
 		return false;

@@ -63,10 +63,27 @@ public class Individuo implements IIndividuo{
 		
 	}
 
+	
+	/**
+	 * Metodo privado que nos permite generar un numero aleatorio en un intervalo
+	 * cerrado [min, max]
+	 * 
+	 * @param min Numero aleatorio minimo.
+	 * @param max Numero aleatorio maximo.
+	 * @return int con un numero aleatorio entre min y max, ambos incluidos.
+	 */
+	public static int aleatNum(int min, int max) {
+		return min + (int)(Math.random() * (max-min+1));
+	}
+	
 	/**
 	 * Metodo que nos permite crear un individuo aleatorio dadas
 	 * una lista de Terminales y otra de Funciones, ademas de una
 	 * profundidad para el arbol.
+	 * 
+	 * Aunque no se especifica en el enuncido, las funciones
+	 * pueden tener cualquier numero de argumentos, de forma
+	 * que la clase es lo mas general posible.
 	 * 
 	 * @param profundidad profundidad para el arbol de la expresion.
 	 * @param terminales Lista de terminales entre las que elegir.
@@ -74,15 +91,34 @@ public class Individuo implements IIndividuo{
 	 */
 	@Override
 	public void crearIndividuoAleatorio(int profundidad, List<Terminal> terminales, List<Funcion> funciones) {
-		// TODO Auto-generated method stub
+		this.expresion = crearRecursivo(profundidad, terminales, funciones);
+	}
+	
+	public INodo crearRecursivo(int profundidad, List<Terminal> terminales, List<Funcion> funciones) {
+		INodo nodo;
+		if(profundidad == 0) {
+			/* Solo un terminal*/
+			nodo = terminales.get(aleatNum(0, terminales.size()-1)).copy();
+			return nodo;
+		}
 		
+		/*Si no, una funcion con los parametros que necesite.*/
+		Funcion funcion = funciones.get(aleatNum(0, funciones.size()-1));
+		nodo = funcion.copy();
+		/*Permitimos que uno de los descendientes pueda tener una profundidad menor, 
+		 * mejorando asi la aleatoriedad del algoritmo. */
+		nodo.incluirDescendiente(crearRecursivo(aleatNum(0, profundidad - 1), terminales, funciones));
+		for(int i = 1; i < funcion.getNumDescendientes(); i++) {
+			nodo.incluirDescendiente(crearRecursivo(profundidad - 1, terminales, funciones));
+		}
+		return nodo;
 	}
 
 	/**
 	 * Metodo que calcula la expresion de un IIndividuo.
 	 * Si no se ha esablecido el valor de Terminal, devuelve 0.0.
 	 * 
-	 * @return evaluacon numerica de la expresion del
+	 * @return evaluacion numerica de la expresion del
 	 * IIndividuo. Si no se ha esablecido el valor de 
 	 * Terminal, devuelve 0.0.
 	 */

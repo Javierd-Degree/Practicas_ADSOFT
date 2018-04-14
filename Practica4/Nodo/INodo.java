@@ -83,6 +83,14 @@ public interface INodo {
 	public INodo buscarNodo(int etiqueta);
 	
 	
-	/*TODO*/
+	/**
+	 * Metodo recursivo que permite reemplazar el INodo cuya etiqueta se pasa
+	 * como parametro, por el INodo pasado.
+	 * 
+	 * @param etiqueta int con la etiqueta del nodo a reemplazar.
+	 * @param sustituto INodo que queremos poner en la posicion
+	 * del anterior.
+	 * @return parametro usado por la recursion que se puede ignorar.
+	 */
 	public boolean reemplazarNodo(int etiqueta, INodo sustituto);
 }

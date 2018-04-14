@@ -15,7 +15,11 @@ import javax.annotation.processing.FilerException;
 import Excepciones.ArgsDistintosFuncionesException;
 import Individuo.IIndividuo;
 import Nodo.Terminal;
+import Nodo.TerminalAritmetico;
 import Nodo.Funcion.Funcion;
+import Nodo.Funcion.FuncionMultiplicacion;
+import Nodo.Funcion.FuncionResta;
+import Nodo.Funcion.FuncionSuma;
 
 /**
 * Clase DominioAritmetico que implementa la interfaz IDominio.
@@ -24,16 +28,6 @@ import Nodo.Funcion.Funcion;
 * @author Estuiante EPS Javier.lopezcano@estudiante.uam.es
 */
 public class DominioAritmetico implements IDominio{
-	/**
-	 * @param terminales Lista de terminales del dominio.
-	 */
-	private List<Terminal> terminales;
-	
-	/**
-	 * @param funciones Lista de funciones del Dominio.
-	 */
-	private List<Funcion> funciones;
-	
 	/**
 	 * @param valores Conjunto de valores sobre los que
 	 * probar un IIndividuo para calcular su fitness.
@@ -47,30 +41,47 @@ public class DominioAritmetico implements IDominio{
 	 * @return Lista de terminales anadidos.
 	 */
 	public List<Terminal> definirConjuntoTerminales(String... terminales){
-		this.terminales = new ArrayList<>();
+		List<Terminal>  lter = new ArrayList<>();
+		for(String s: terminales) {
+			Terminal t = new TerminalAritmetico(s);
+			lter.add(t);
+		}
 		
-		return this.terminales;
+		return lter;
 	}
 	
 	/**
-	 * Define el conjunto de funciones de un IDominio.
+	 * Crea un conjunto de funciones a partir de los simbolos y el numero
+	 * de argumentos de cada funcion. Acualmente las funciones solo pueden
+	 * ser suma, resta y multiplicacion.
 	 * 
-	 * TODO Completar
-	 * 
-	 * @param argumentos array de int que tienen las funciones como argumentos.
-	 * @param 
-	 * @return
-	 * @throws ArgsDistintosFuncionesException
+	 * @param argumentos array del numero de arumentos que tiene cada funcion.
+	 * @param funciones array con el simbolo de las funciones. Puede ser *, + o -.
+	 * @return Lista con las funciones creadas.
+	 * @throws ArgsDistintosFuncionesException si hay el numero de argumentos y
+	 * de funciones no es el mismo.
 	 */
 	public List<Funcion> definirConjuntoFunciones(int[] argumentos, String... funciones) throws
-	ArgsDistintosFuncionesException{
+		ArgsDistintosFuncionesException{
+		List<Funcion> lfun = new ArrayList<>();
 		if(argumentos.length != funciones.length) {
 			throw new ArgsDistintosFuncionesException();
 		}
 		
-		this.funciones = new ArrayList<Funcion>();
+		for(int i = 0; i < funciones.length; i++) {
+			Funcion fun;
+			if(funciones[i].equals("+")) {
+				fun = new FuncionSuma(argumentos[i]);
+			}else if(funciones[i].equals("-")) {
+				fun = new FuncionResta(argumentos[i]);
+			}else {
+				fun = new FuncionMultiplicacion(argumentos[i]);
+			}
+			
+			lfun.add(fun);
+		}
 		
-		return this.funciones;
+		return lfun;
 	}
 	
 	/**
@@ -94,7 +105,10 @@ public class DominioAritmetico implements IDominio{
 	
 	/**
 	 * Dado un individuo, calcula su nivel de fitness usando los valores cargados
-	 * mediante definirValoresPrueba. 
+	 * mediante definirValoresPrueba.
+	 * Evalua el IIndividuo en los puntos dados, si la diferencia en un punto
+	 * con respecto al valor esperado, es menor que uno en valor absoluto,
+	 * sumamos uno al fitness del individuo.
 	 * 
 	 * @param individuo IIndividuo cuyo nivel de fitness queremos calcular.
 	 * @return double con el valor de fitness del individuo.
@@ -109,7 +123,8 @@ public class DominioAritmetico implements IDominio{
 		for(Map.Entry<Double, Double> entry: this.valores.entrySet()) {
 			Terminal.setValor(entry.getKey());
 			double resultado = individuo.calcularExpresion();
-			System.out.printf("Valor %.1f <-> Rdo estimado: %.1f <-> Rdo real: %.1f\n", entry.getKey(), resultado, entry.getValue());
+			//TODO Descomentar para probar el TesterFitness
+			//System.out.printf("Valor %.1f <-> Rdo estimado: %.1f <-> Rdo real: %.1f\n", entry.getKey(), resultado, entry.getValue());
 			if(Math.abs(resultado-entry.getValue()) <= 1) {
 				fitness ++;
 			}
@@ -117,5 +132,37 @@ public class DominioAritmetico implements IDominio{
 		/*Aunque no se indica en el enunciado, actualizamos el individuo.*/
 		individuo.setFitness(fitness);
 		return fitness;
+	}
+	
+	/**
+	 * Funcion fitness ideada por nosotros.
+	 * Dado un individuo, calcula su nivel de fitness usando los valores cargados
+	 * mediante definirValoresPrueba. 
+	 * Evalua el IIndividuo en los puntos dados y devuelve la media de la distancia
+	 * entre la evaluacion del IIndividuo y la funcion pedida. De esta forma,
+	 * permite analizar con mayor precision la validez del IIndividuo.
+	 * 
+	 * @param individuo IIndividuo cuyo nivel de fitness queremos calcular.
+	 * @return double con el valor de fitness del individuo.
+	 */
+	public double calcularFitnessAvanzado(IIndividuo individuo) {
+		double fitness = 0;
+		int n = 0;
+		if(valores == null) {
+			System.out.println("Es necesario cargar los valores llamando a definirValoresPrueba para calcular el fitness.");
+			return 0.0;
+		}
+		/*Recorremos la lista de valores y los vamos calculando*/
+		for(Map.Entry<Double, Double> entry: this.valores.entrySet()) {
+			Terminal.setValor(entry.getKey());
+			double resultado = individuo.calcularExpresion();
+			//TODO Descomentar para probar el TesterFitness
+			//System.out.printf("Valor %.1f <-> Rdo estimado: %.1f <-> Rdo real: %.1f\n", entry.getKey(), resultado, entry.getValue());
+			fitness += Math.abs(resultado-entry.getValue());
+			n ++;
+		}
+		/*Aunque no se indica en el enunciado, actualizamos el individuo.*/
+		individuo.setFitness(fitness/n);
+		return fitness/n;
 	}
 }
