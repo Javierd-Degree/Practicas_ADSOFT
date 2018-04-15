@@ -19,7 +19,7 @@ import Nodo.Terminal;
 public interface IDominio {
 	
 	/**
-	 * Define el conjunto de terminales de un IDominio
+	 * Crea el conjunto de terminales de un IDominio
 	 * 
 	 * @param terminales terminales a anadir IDominio.
 	 * @return Lista de terminales anadidos.
@@ -27,14 +27,14 @@ public interface IDominio {
 	public List<Terminal> definirConjuntoTerminales(String... terminales);
 	
 	/**
-	 * Define el conjunto de funciones de un IDominio.
-	 * 
-	 * TODO Completar
+	 * Crea el conjunto de funciones de un IDominio dados los simbolos
+	 * de las funciones, y el numero de elementos de entrada de cada una.
 	 * 
 	 * @param argumentos array de int que tienen las funciones como argumentos.
-	 * @param 
-	 * @return
-	 * @throws ArgsDistintosFuncionesException
+	 * @param funciones Simbolos de las funciones a definir.
+	 * @return Lista con las funciones creadas.
+	 * @throws ArgsDistintosFuncionesException si la longitud de argumentos
+	 * y la de funciones difiere.
 	 */
 	public List<Funcion> definirConjuntoFunciones(int[] argumentos, String... funciones) throws
 	ArgsDistintosFuncionesException;

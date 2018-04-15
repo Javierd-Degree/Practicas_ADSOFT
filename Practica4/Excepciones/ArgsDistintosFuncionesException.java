@@ -1,7 +1,8 @@
 package Excepciones;
 
 /**
-* Excepcion usada para TODO
+* Excepcion usada para asegurar la integridad
+* de la funcion definirConjuntoFunciones en un IDominio.
 * 
 * @author Estuiante EPS Javier.delgadod@estudiante.uam.es
 * @author Estuiante EPS Javier.lopezcano@estudiante.uam.es

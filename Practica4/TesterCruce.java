@@ -11,7 +11,27 @@ import Nodo.Funcion.FuncionMultiplicacion;
 import Nodo.Funcion.FuncionResta;
 import Nodo.Funcion.FuncionSuma;
 
+
+/**
+* Clase que nos permite probar el cruce de dos IIndividuos 
+* usando el metodo creado en Pruebacruce.
+* 
+* @author Estuiante EPS Javier.delgadod@estudiante.uam.es
+* @author Estuiante EPS Javier.lopezcano@estudiante.uam.es
+*/
 public class TesterCruce {
+	/**
+	 * Metodo que inicializa y cruza dos individuos, imprimiendolos
+	 * a ellos y a sus descendientes.
+	 * 
+	 * Dado el funcionamiento aleatorio de nuestro algoritmo, y la 
+	 * simpleza de los IIndividuos utilizados para este ejemplo, es
+	 * es posible que al ejecutarse los progenitores y los descendientes
+	 * sean exactamente iguales, y por tanto haya que ejecutarlo varias
+	 * veces hasta poder ver cambios.
+	 * 
+	 * @param args Argumentos pasados a la funcion. No se utiliza.
+	 */
 	public static void main(String[] args) {
 		PruebaCruce prueba = new PruebaCruce();
 		List<IIndividuo> descendientes = new ArrayList<IIndividuo>();

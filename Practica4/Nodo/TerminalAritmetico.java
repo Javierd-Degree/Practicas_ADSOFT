@@ -26,9 +26,8 @@ public class TerminalAritmetico extends Terminal{
 	 */
 	@Override
 	public INodo copy() {
-		/*TODO: Un terminal no puede tener hijos.*/
 		INodo copia = new TerminalAritmetico(simbolo);
 		
 		return copia;
-	}
+	}	
 }

@@ -14,32 +14,94 @@ import Nodo.INodo;
 import Nodo.Terminal;
 import Nodo.Funcion.Funcion;
 
+/**
+* Clase Algoritmo que implementa un algortmo genetico mediante
+* la interfaz IAlgoritmo.
+* 
+* @author Estuiante EPS Javier.delgadod@estudiante.uam.es
+* @author Estuiante EPS Javier.lopezcano@estudiante.uam.es
+*/
 public class Algoritmo implements IAlgoritmo{
+	
+	/**
+	 * @param terminales Lista de terminales del algoritmo.
+	 */
 	private List<Terminal> terminales;
+	
+	/**
+	 * @param funciones Lista de funciones del algoritmo.
+	 */
 	private List<Funcion> funciones;
+	
+	/**
+	 * @param poblacion Poblacion con la cual trabaja el 
+	 * algoritmo.
+	 */
 	private List<IIndividuo> poblacion;
 	
+	/**
+	 * @param numIndividuos numero de individuos con los que
+	 * trabajara el algoritmo.
+	 */
 	private int numIndividuos;
-	private int profundidad;
-	private int numGeneraciones;
-	private int porcentajeFijo = 20;
 	
+	/**
+	 * @param profundidad Profundidad inicial de los individuos
+	 * del algoritmo.
+	 */
+	private int profundidad;
+	
+	/**
+	 * @param numGeneraciones Numero de generaciones que queremos que desarrolle el
+	 * algoritmo.
+	 */
+	private int numGeneraciones;
+	
+	/**
+	 * Constructor de la clase Algoritmo.
+	 * 
+	 * @param numIndividuos Numero de individuos de la pobalcion.
+	 * @param profundidad Profundidad por defecto de los individuos
+	 * de la poblacion.
+	 * @param numGeneraciones Numero de generaciones que desarrollara
+	 * el algoritmo.
+	 */
 	public Algoritmo(int numIndividuos, int profundidad, int numGeneraciones) {
 		this.numIndividuos = numIndividuos;
 		this.profundidad = profundidad;
 		this.numGeneraciones = numGeneraciones;
 	}
 	
+	/**
+	 * Metodo que permite definir el conjunto de terminales del Algoritmo.
+	 * 
+	 * @param terminales Conjunto de terminales que tendra el algoritmo.
+	 */
 	@Override
 	public void defineConjuntoTerminales(List<Terminal> terminales) {
 		this.terminales = terminales;
 	}
 
+	/**
+	 * Metodo que permite definir el conjunto de funciones del Algoritmo.
+	 * 
+	 * @param funciones Conjunto de funciones que tendra el algoritmo.
+	 * @throws ArgsDistintosFuncionesException Nunca, pero estaba definido
+	 * asi en la interfaz dada.
+	 */
 	@Override
 	public void defineConjuntoFunciones(List<Funcion> funciones) throws ArgsDistintosFuncionesException {
 		this.funciones = funciones;
 	}
 
+	/**
+	 * Metodo inicializa la poblacion inicial de un algoritmo, 
+	 * creando individuos aleatorios con las funciones, terminales
+	 * y profundidad establecidos.
+	 * 
+	 * Si no se han establecido los terminales o las funciones
+	 * simplemente lanza un mensaje de error. 
+	 */
 	@Override
 	public void crearPoblacion() {
 		if(this.terminales == null || this.funciones == null) {
@@ -54,7 +116,20 @@ public class Algoritmo implements IAlgoritmo{
 			this.poblacion.add(ind);
 		}
 	}
-
+	
+	/**
+	 * Metodo que implementa el cruce aleatorio entre dos individuos.
+	 * Elegimos un nodo al azar de cada uno de los individuos, los
+	 * cambiamos, y devolvemos una copia. Asi, dos indiviuos generan
+	 * otros dos descendientes, que son una mezcla de ambos.
+	 * 
+	 * Es el mismo metodo que el creado en PruebaCruce.
+	 * 
+	 * @param ind1 IIndividuo para cruzar
+	 * @param ind2 IIndividuo para cruzar
+	 * @return Lista con los dos individuos descendientes.
+	 * @throws CruceNuloException Si los dos descendientes
+	 */
 	@Override
 	public List<IIndividuo> cruce(IIndividuo ind1, IIndividuo ind2) throws CruceNuloException {
 		List<IIndividuo> result = new ArrayList<>();
@@ -106,9 +181,13 @@ public class Algoritmo implements IAlgoritmo{
 	}
 
 	/**
-	 * Segundo metodo de cruce que probamos, vamos a usar algo parecido a la seleccion
-	 * natural. Nos quedamos con la mejor mitad de los individuos, y los cruzamos entre
-	 * ellos.
+	 * Metodo que permite evolucionar a la poblacion.
+	 * Usamos un algorimo basado en la seleccion natural, de esta forma,
+	 * dada una generacion, solo la mitad de los individuos, aquellos
+	 * con mejor fitness, sobreviven, y de estos, la primera mitad
+	 * se reproduce con el resto. De esta forma, siempre se van a 
+	 * reproducir los mejores entre si, y mantenemos el numero de la
+	 * poblacion constante.
 	 */
 	@Override
 	public void crearNuevaPoblacion() {
@@ -139,40 +218,11 @@ public class Algoritmo implements IAlgoritmo{
 		this.poblacion = poblacion2;
 	}
 	
-	
-	/* TODO Borrar
-	 * Primer metodo de cruce que probamos, no funciona muy bien.*/
-	public void crearNuevaPoblacion2() {
-		/* Nos quedamos con los mejores individuos. Del resto, cruzamos la mitad, los mejores,
-		 * y el resto los borramos.*/
-		List<IIndividuo> poblacion2 = new ArrayList<>();
-		int numFijos = (int) (poblacion.size()*((double)this.porcentajeFijo/100));
-		int numBorrar = (int) (poblacion.size()*((double)(100 - this.porcentajeFijo)/200));
-		/* Incluimos los mejores */
-		poblacion2.addAll(this.poblacion.subList(0, numFijos));
-		
-		/* Incluimos la mitad del resto */
-		poblacion2.addAll(this.poblacion.subList(numFijos, poblacion.size()-numBorrar-1));
-		
-		/* Incluimos los hijos de dicha mitad, juntandolos de forma aleatoria */
-		List<IIndividuo> temp = poblacion.subList(numFijos, poblacion.size()-numBorrar);
-		for(int i = 0; i< temp.size(); i++) {
-			int j;
-			do {
-				j = Individuo.aleatNum(0, temp.size()-1);
-			}while(j != i);
-			
-			try {
-				poblacion2.addAll(cruce(temp.get(i), temp.get(j)));
-			} catch (CruceNuloException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		this.poblacion.clear();
-		this.poblacion = poblacion2;
-	}
-
+	/**
+	 * Metodo que permite, una vez inicializadas las funciones,
+	 * los terminales y la poblacion del Algoritmo, desarrollarlo,
+	 * imprimiendo por pantalla el mejor algoritmo de cada generacion.
+	 */
 	@Override
 	public void ejecutar(IDominio dominio) {
 		if(this.poblacion == null) {
@@ -184,8 +234,6 @@ public class Algoritmo implements IAlgoritmo{
 			/*Calculamos el fitness de todos los terminos de la lista*/
 			for(IIndividuo ind: this.poblacion) {
 				dominio.calcularFitnessAvanzado(ind);
-				/*ind.writeIndividuo();
-				System.out.println(": "+ind.getFitness());*/
 			}
 			
 			/* Implementamos un comparator que nos permita ordenar los Individuos
@@ -202,18 +250,9 @@ public class Algoritmo implements IAlgoritmo{
 			System.out.printf("En la generacion %d el mejor fitness es %.2f de la expresion: %s\n",
 					i, this.poblacion.get(0).getFitness(), this.poblacion.get(0).getExpresion().toString());
 			
-			double fit = poblacion.get(0).getFitness(), n = 0;
-			if(fit == 0.0) {
+			if(poblacion.get(0).getFitness() == 0.0) {
 				break;
 			}
-			/**for(IIndividuo ind: poblacion) {
-				if(ind.getFitness() != fit && fit < 1000) {
-					System.out.println("Hay "+n+" individuos con fitness "+fit);
-					fit = ind.getFitness();
-					n = 0;
-				}
-				n++;
-			}*/
 			
 			crearNuevaPoblacion();
 		}

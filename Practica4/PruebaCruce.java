@@ -16,6 +16,17 @@ import Nodo.INodo;
 
 public class PruebaCruce {
 	
+	/**
+	 * Metodo que implementa el cruce aleatorio entre dos individuos.
+	 * Elegimos un nodo al azar de cada uno de los individuos, los
+	 * cambiamos, y devolvemos una copia. Asi, dos indiviuos generan
+	 * otros dos descendientes, que son una mezcla de ambos.
+	 * 
+	 * @param ind1 IIndividuo para cruzar
+	 * @param ind2 IIndividuo para cruzar
+	 * @return Lista con los dos individuos descendientes.
+	 * @throws CruceNuloException Si los dos descendientes
+	 */
 	public List<IIndividuo> cruce(IIndividuo ind1, IIndividuo ind2) throws CruceNuloException{
 		List<IIndividuo> result = new ArrayList<>();
 		int a = Individuo.aleatNum(0, ind1.getNumeroNodos()-1);
@@ -51,15 +62,14 @@ public class PruebaCruce {
 		
 		INodo nodo1 = copia1.getExpresion().buscarNodo(a);
 		INodo nodo2 = copia2.getExpresion().buscarNodo(b);
+	
+		copia1.getExpresion().reemplazarNodo(a, nodo2);
+		copia2.getExpresion().reemplazarNodo(b, nodo1);
+		copia1.etiquetaNodos();
+		copia2.etiquetaNodos();
 		
 		result.add(copia1);
 		result.add(copia2);
-		copia1.getExpresion().reemplazarNodo(a, nodo2);
-		copia2.getExpresion().reemplazarNodo(b, nodo1);
-		
-		/*TODO Reetiquetar los nodos despues del cruce. No lo hacemos porque
-		 * ahora mismo el etiquetar imprime, y seria muy molesto.*/
-		
 		return result;
 	}
 

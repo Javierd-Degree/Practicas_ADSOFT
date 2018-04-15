@@ -123,8 +123,7 @@ public class DominioAritmetico implements IDominio{
 		for(Map.Entry<Double, Double> entry: this.valores.entrySet()) {
 			Terminal.setValor(entry.getKey());
 			double resultado = individuo.calcularExpresion();
-			//TODO Descomentar para probar el TesterFitness
-			//System.out.printf("Valor %.1f <-> Rdo estimado: %.1f <-> Rdo real: %.1f\n", entry.getKey(), resultado, entry.getValue());
+			System.out.printf("Valor %.1f <-> Rdo estimado: %.1f <-> Rdo real: %.1f\n", entry.getKey(), resultado, entry.getValue());
 			if(Math.abs(resultado-entry.getValue()) <= 1) {
 				fitness ++;
 			}
@@ -156,8 +155,6 @@ public class DominioAritmetico implements IDominio{
 		for(Map.Entry<Double, Double> entry: this.valores.entrySet()) {
 			Terminal.setValor(entry.getKey());
 			double resultado = individuo.calcularExpresion();
-			//TODO Descomentar para probar el TesterFitness
-			//System.out.printf("Valor %.1f <-> Rdo estimado: %.1f <-> Rdo real: %.1f\n", entry.getKey(), resultado, entry.getValue());
 			fitness += Math.abs(resultado-entry.getValue());
 			n ++;
 		}
