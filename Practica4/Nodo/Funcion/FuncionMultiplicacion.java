@@ -30,7 +30,7 @@ public class FuncionMultiplicacion extends Funcion{
 	 */
 	@Override
 	public INodo copy() {
-		INodo copia = new FuncionMultiplicacion(this.nDescendientes);
+		INodo copia = new FuncionMultiplicacion(this.getNumDescendientes());
 		for(INodo nodo: this.descendientes) {
 			copia.incluirDescendiente(nodo.copy());
 		}

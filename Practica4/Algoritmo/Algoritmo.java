@@ -222,6 +222,9 @@ public class Algoritmo implements IAlgoritmo{
 	 * Metodo que permite, una vez inicializadas las funciones,
 	 * los terminales y la poblacion del Algoritmo, desarrollarlo,
 	 * imprimiendo por pantalla el mejor algoritmo de cada generacion.
+	 * 
+	 * @param dominio IDominio sobre el que calculamos el fitness
+	 * de los individuos.
 	 */
 	@Override
 	public void ejecutar(IDominio dominio) {

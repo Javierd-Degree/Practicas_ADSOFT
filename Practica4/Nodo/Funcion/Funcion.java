@@ -16,7 +16,7 @@ public abstract class Funcion extends Nodo{
 	 * @param nDescencientes Numero de operandos que tiene
 	 * la operacion.
 	 */
-	protected int nDescendientes;
+	private int nDescendientes;
 	
 	/**
 	 * Constructor por defecto de la clase Funcion.

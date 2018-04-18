@@ -31,7 +31,7 @@ public class FuncionSuma extends Funcion{
 	 */
 	@Override
 	public INodo copy() {
-		INodo copia = new FuncionSuma(this.nDescendientes);
+		INodo copia = new FuncionSuma(this.getNumDescendientes());
 		for(INodo nodo: this.descendientes) {
 			copia.incluirDescendiente(nodo.copy());
 		}
