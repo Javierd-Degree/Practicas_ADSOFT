@@ -1,7 +1,6 @@
 package Grafo;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -54,6 +53,11 @@ public class GrafoNoDirigido<T> extends Grafo<T>{
 		}
 		
 		return lista;
+	}
+	
+	@Override
+	public int getNumArcos() {
+		return super.getNumArcos()/2;
 	}
 
 }

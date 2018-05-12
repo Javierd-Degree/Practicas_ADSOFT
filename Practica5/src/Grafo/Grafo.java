@@ -39,6 +39,10 @@ public abstract class Grafo<T> {
 		return lista;
 	}
 	
+	public Vertice<T> getVertice(Integer id){
+		return this.vertices.get(id);
+	}
+	
 	public int getNumArcos() {
 		return this.arcos.size();
 	}

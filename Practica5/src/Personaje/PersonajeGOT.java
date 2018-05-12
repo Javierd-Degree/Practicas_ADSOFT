@@ -9,4 +9,11 @@ public class PersonajeGOT {
 		this.casa = casa;
 	}
 
+	public String getNombre() {
+		return nombre;
+	}
+	
+	public String getCasa() {
+		return casa;
+	}
 }
