@@ -8,11 +8,37 @@ import java.util.Map.Entry;
 import Personaje.PersonajeGOT;
 import Simulador.SimuladorGOT;
 
+
+/**
+* Clase que hereda de Observer y que  implementa un observador 
+* de las interacciones de un PersonajeGOT.
+* 
+* @author Estuiante EPS Javier.delgadod@estudiante.uam.es
+* @author Estuiante EPS Javier.lopezcano@estudiante.uam.es
+*/
 public class ObservadorGOT extends Observer {
+	/**
+	 * @param personaje PersonajeGOT al que queremos observar en el grafo.
+	 */
 	private PersonajeGOT personaje;
+	
+	/**
+	 * @param interaccionesCasa numero de interacciones que ha hecho con
+	 * los personajes de su propia casa.
+	 */
 	private int interaccionesCasa;
+	
+	/**
+	 * @param interaccionesFuera Map con las interacciones que ha tenido con cada una de las casas.
+	 */
 	private Map<String, Integer> interaccionesFuera;
 	
+	/**
+	 * Constructor por defecto de la clase ObservadorGOT.
+	 * 
+	 * @param s Simulador que tenemos que observar.
+	 * @param p Personaje dentro del simulador que tenemos que observar.
+	 */
 	public ObservadorGOT(SimuladorGOT s, PersonajeGOT p) {
 		super(s);
 		this.personaje = p;
@@ -20,6 +46,10 @@ public class ObservadorGOT extends Observer {
 		this.interaccionesFuera = new HashMap<>();
 	}
 	
+	/**
+	 * Metodo que permite notificar al ObservadorGOT de
+	 * que actualice las interacciones del PersonajeGOT.
+	 */
 	public void actualizar() {
 		SimuladorGOT simulador = (SimuladorGOT) super.subject;
 		PersonajeGOT origen = simulador.getOrigen();
@@ -41,6 +71,11 @@ public class ObservadorGOT extends Observer {
 		}
 	}
 	
+	/**
+	 * Metodo que permite mostrar las interacciones del PersonajeGOT seguido.
+	 * 
+	 * @return String con un desglose de las interacciones realizadas.
+	 */
 	public String toString() {
 		String result = personaje.getNombre();
 		int intFuera = interaccionesFuera.entrySet().parallelStream().mapToInt(Entry<String, Integer>::getValue).sum();

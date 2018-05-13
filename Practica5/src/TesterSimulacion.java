@@ -8,7 +8,27 @@ import Personaje.PersonajeGOT;
 import Simulador.SimuladorGOT;
 import Vertice.Vertice;
 
+/**
+* Clase que permite ejecutar la simulacion tal y como se explica en el enunciado 
+* de la práctica.
+* 
+* @author Estuiante EPS Javier.delgadod@estudiante.uam.es
+* @author Estuiante EPS Javier.lopezcano@estudiante.uam.es
+*/
 public class TesterSimulacion {
+	
+	/**
+	 * Metodo main de la clase TesterSimulacion.
+	 * Para probar las clases SimuladorGOT y ObserverGOT, inicializamos un GrafoGOT,
+	 * y establecemos tres Observer, uno para Jon Snow, otro para Hodor, y otro para
+	 * Viserys Targaryen.
+	 * Entonces, elegimos aleatoriamente un personaje del grafo, y hacemos que interaccione.
+	 * Repetimos dicho proceso un numero N de veces, fijado al principio.
+	 * Finalmente, mostramos por pantalla el resultado de las interacciones de 
+	 * los tres personajes.
+	 * 
+	 * @param args Argumos de entrada. Se ignoran.
+	 */
 	public static void main(String[] args) {
 		int N = 5000;
 		

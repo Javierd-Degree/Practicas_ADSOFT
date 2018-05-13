@@ -4,8 +4,21 @@ import Grafo.Grafo;
 import Grafo.GrafoNoDirigido;
 import Vertice.Vertice;
 
+/**
+* Clase que permite probar las clases Grafo y GrafoNoDirigido.
+* 
+* @author Estuiante EPS Javier.delgadod@estudiante.uam.es
+* @author Estuiante EPS Javier.lopezcano@estudiante.uam.es
+*/
 public class Tester1 {
 
+	/**
+	 * Metodo main de la clase Tester1. 
+	 * Creamos un GrafoNoDirigido, anadimos vertices y arcos entre dichos vertices,
+	 * e imprimims el grafo y archos para comprobar que funciona correctamente.
+	 * 
+	 * @param args Argumos de entrada. Se ignoran.
+	 */
 		public static void main(String[] args) {
 			
 			Grafo<String> g = new GrafoNoDirigido<>();

@@ -1,6 +1,22 @@
 import Grafo.GrafoGOT;
 
+/**
+* Clase que permite probar la clase GrafoGOT mediante el uso de expresiones
+* lamba en la medida de lo posible.
+* 
+* @author Estuiante EPS Javier.delgadod@estudiante.uam.es
+* @author Estuiante EPS Javier.lopezcano@estudiante.uam.es
+*/
 public class Tester2 {
+	
+	/**
+	 * Metodo main de la clase Tester2. 
+	 * Creamos un GrafoGOT y probamos todos los metodos, comprobando su
+	 * correccion mediante expresiones lambda, o imprimiendo su resultado
+	 * para que se pueda comprobar mediante los archivos suministrados.
+	 * 
+	 * @param args Argumos de entrada. Se ignoran.
+	 */
 	public static void main(String[] args) {
 		GrafoGOT grafo;
 		try {
@@ -18,17 +34,17 @@ public class Tester2 {
 			System.out.println("Casa "+p+":\n\t"+ grafo.miembrosCasa(p));
 		});
 		
-		System.out.println("Probamos si las funciones de grado funcionan");
+		System.out.println("\nProbamos si las funciones de gradoPersonajes gradoPonderadoPersonajes y  funcionan");
 		grafo.gradoPersonajes().forEach((name, value) -> {
 			int t = grafo.getVecinosDe(grafo.getVertice(name)).size();
 			if(t != value) {
-				System.out.println("Ha fallado en: "+name);
+				System.out.println("\tHa fallado en: "+name);
 			}
 		});
 		
 		System.out.println(grafo.gradoPonderadoPersonajes());
 		
-		
+		System.out.println("\nProbamos la funcion de personajesRelevantes");
 		System.out.println(grafo.personajesRelevantes());
 	}
 }

@@ -37,6 +37,7 @@ public abstract class Grafo<T> {
 	/**
 	 * Funcion que crea un vertice con unos datos determinados llamando a otro metodo que crea un id para el vertice.
 	 * @param datos Datos que se quieren anadir al vertice.
+	 * @return Vertice anadido.
 	 */
 	public Vertice<T> addVertice(T datos){
 		Vertice<T> v = addVertice(this.vertices.size(), datos);
@@ -127,6 +128,7 @@ public abstract class Grafo<T> {
 	 * Funcion que anade un arco al grafo, es abstracta pues depende de si el grafo es o no dirigido.
 	 * @param v1 Vertice de salida del arco a anadir.
 	 * @param v2 vertice final del arco a anadir.
+	 * @param peso Peso del arco
 	 */
 	public abstract void addArco(Vertice<T> v1, Vertice<T> v2, double peso);
 	

@@ -26,7 +26,9 @@ public class GrafoGOT extends GrafoNoDirigido<PersonajeGOT>{
 	/**
 	 * Constructor del grafo no dirigido, que lo crea a partir de los datos de 2 ficheros.
 	 * @param ficheroVertices String con el nombre del fichero con los datos de los vertices.
-	 * @param ficheroArchivos String con el nombre del fichero con los datos de los arcos del grafo.
+	 * @param ficheroArcos String con el nombre del fichero con los datos de los arcos del grafo.
+	 * 
+	 * @throws Exception when the files don't exist.
 	 */
 	public GrafoGOT(String ficheroVertices, String ficheroArcos) throws Exception {
 		super();
@@ -69,7 +71,7 @@ public class GrafoGOT extends GrafoNoDirigido<PersonajeGOT>{
 	
 	/**
 	 * Funcion que halla el vertice del grafo con el personaje con el nombre que se pasa como argumento.
-	 * @param nombre String con el nombre del personaje del vertice que se quiere hallar.
+	 * @param name String con el nombre del personaje del vertice que se quiere hallar.
 	 * @return vertice con el personaje con el nombre pasado como argumento.
 	 */
 	public Vertice<PersonajeGOT> getVertice(String name){
